@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Briefcase, Sparkles } from "lucide-react"
+import { Home, Briefcase, Sparkles, PlusSquare } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function MobileTabBar() {
@@ -16,11 +16,17 @@ export function MobileTabBar() {
       match: pathname.startsWith("/servicios"),
     },
     {
+      href: "/publicar/propiedad",
+      label: "Publicar",
+      icon: PlusSquare,
+      match: pathname.startsWith("/publicar"),
+    },
+    {
       href: "/vip",
       label: "VIP",
       icon: Sparkles,
       luxe: true,
-      match: pathname.startsWith("/vip") || pathname.startsWith("/publicar"),
+      match: pathname.startsWith("/vip"),
     },
   ]
 
@@ -39,7 +45,7 @@ export function MobileTabBar() {
                   href={tab.href}
                   aria-current={tab.match ? "page" : undefined}
                   className={cn(
-                    "relative mx-auto flex h-10 items-center justify-center gap-2 rounded-full px-4 text-[11px] font-medium tracking-wide uppercase transition-colors",
+                    "relative mx-auto flex h-10 items-center justify-center gap-1.5 rounded-full px-3 text-[11px] font-medium tracking-wide uppercase transition-colors",
                     tab.match
                       ? tab.luxe
                         ? "bg-[color:var(--luxe)]/12 text-[color:var(--luxe)] ring-1 ring-[color:var(--luxe)]/30"
@@ -47,8 +53,8 @@ export function MobileTabBar() {
                       : "text-muted-foreground",
                   )}
                 >
-                  <Icon className="size-4" strokeWidth={1.5} />
-                  <span>{tab.label}</span>
+                  <Icon className="size-4 shrink-0" strokeWidth={1.5} />
+                  {tab.match && <span>{tab.label}</span>}
                 </Link>
               </li>
             )

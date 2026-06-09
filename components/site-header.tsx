@@ -3,15 +3,26 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { User } from "lucide-react"
+import { User, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { createClient } from "@/lib/supabase/client"
 
 export function SiteHeader() {
   const pathname = usePathname()
   const [hidden, setHidden] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [signedIn, setSignedIn] = useState(false)
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data }) => setSignedIn(!!data.user))
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) =>
+      setSignedIn(!!session?.user),
+    )
+    return () => sub.subscription.unsubscribe()
+  }, [])
 
   useEffect(() => {
     let lastY = window.scrollY
@@ -102,16 +113,38 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 md:gap-2">
           <ThemeToggle />
+
+          {/* Publicar — acceso al portal gratuito */}
           <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full"
-            aria-label="Perfil"
+            asChild
+            variant="outline"
+            size="sm"
+            className="hidden rounded-full sm:inline-flex"
           >
-            <User className="size-4" />
+            <Link href="/publicar/propiedad">
+              <Plus className="size-4" strokeWidth={2} />
+              Publicar
+            </Link>
           </Button>
+
+          {/* Ingresar / Mi cuenta */}
+          {signedIn ? (
+            <Button asChild size="sm" className="rounded-full">
+              <Link href="/cuenta" aria-label="Mi cuenta">
+                <User className="size-4" />
+                <span className="hidden sm:inline">Mi cuenta</span>
+              </Link>
+            </Button>
+          ) : (
+            <Button asChild size="sm" className="rounded-full">
+              <Link href="/ingresar" aria-label="Ingresar">
+                <User className="size-4 sm:hidden" />
+                <span className="hidden sm:inline">Ingresar</span>
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </header>
