@@ -94,6 +94,11 @@ Web lee SOLO publicados (next-sanity, ISR)
 - **Git:** repo `juanarangoceo/inmobiliaria`, rama `main` en sync con lo desplegado. Último commit relevante: accesos de navegación (`536aac3`). El proyecto usa **npm** (se borró `pnpm-lock.yaml`).
 - **Pendientes menores:** env var de **preview** en Vercel (bug CLI), renombrar `middleware.ts`→`proxy.ts` (deprecación Next 16), y F8 (i18n/USD).
 
+### Auth · confirmación de correo (importante)
+- **Bug corregido (commit `9ec841c`):** `/auth/confirm` solo manejaba `token_hash`; el correo por defecto de Supabase redirige con `?code=` (PKCE). Ahora la ruta hace `exchangeCodeForSession` y conserva `token_hash`. Funciona en **el mismo navegador** donde se hizo el registro.
+- **Limitación del free tier:** el proveedor de correo por defecto está **rate-limited (~3-4/hora)** → registros reales pueden ver "email rate limit exceeded". Además la plantilla **NO es editable** sin SMTP propio, por lo que no se puede usar el flujo `token_hash` (cross-device) todavía.
+- **Recomendado para producción:** configurar **SMTP propio (Resend free)** en Supabase → habilita más volumen de correos y permite cambiar la plantilla al flujo `token_hash` (la ruta ya lo soporta) para que la confirmación funcione **entre dispositivos**.
+
 ## 6. Convenciones
 
 - Idioma de UI: ES por defecto, EN como segundo idioma (i18n). Código/commits en ES claro.
