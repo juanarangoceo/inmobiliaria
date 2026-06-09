@@ -1,7 +1,7 @@
 # Vision Estate Colombia — Bitácora del proyecto
 
 > Documento vivo. Se actualiza al cerrar cada fase o cambio relevante para que cualquiera
-> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-09 (F1–F7 cerradas y EN PRODUCCIÓN; queda solo F8 global opcional).
+> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-09 (F1–F7 cerradas y EN PRODUCCIÓN; navegación con accesos añadida; repo en sync; queda solo F8 global opcional).
 
 ---
 
@@ -85,7 +85,14 @@ Web lee SOLO publicados (next-sanity, ISR)
 - [x] **F5 — Publicar (usuario):** `lib/listings/actions.ts` (`submitProperty`: sube imágenes a Sanity, crea doc `status=pending`, registra en Supabase `submissions`); `app/publicar/propiedad/page.tsx` (auth-gated) + `components/listings/submit-form.tsx` (form completo con fotos). `/cuenta` enlaza al form. La propiedad enviada aparece en la cola "Por aprobar" del Studio.
 - [x] **F6 — VIP white-label + chatbot:** `lib/ai/google.ts` (Gemini `gemini-3.5-flash` vía `@ai-sdk/google`); `app/api/chat/route.ts` (streaming, system prompt con contexto del inmueble, bilingüe); `components/chat/chat-window.tsx` (useChat v6, color de acento); `VipChatbot` reescrito al chat real; **landing white-label `app/v/[slug]/page.tsx`** (sin chrome, marca del cliente, chatbot que conoce la propiedad). Schema/queries de `vipLanding` añadidos. **Probado en vivo:** Gemini respondió con datos exactos de la propiedad. Landing de ejemplo: `/v/villa-manzanillo`.
 - [x] **F7 — Verificar + desplegar:** `next build` OK; chatbot probado en vivo; **desplegado a producción** en Vercel y aliased a `https://visionestatecolombia.com` (todas las rutas 200, chat en prod responde con datos reales). Nota: se eliminó `pnpm-lock.yaml` (estaba desactualizado y rompía el build de Vercel); el repo usa **npm** (`package-lock.json`). Para redeploy: `vercel deploy --prod --yes`.
+- [x] **F7.1 — Accesos en la navegación:** `components/site-header.tsx` ahora es auth-aware (Supabase browser client): muestra **"Ingresar"** (→ `/ingresar`) o **"Mi cuenta"** (→ `/cuenta`) según sesión, + botón **"Publicar"** (→ `/publicar/propiedad`). `components/mobile-tab-bar.tsx` añade pestaña **"Publicar"** (4 ítems; etiqueta solo en la activa). Aparece en todo el sitio, incluida la zona VIP (mismo header). Verificado en prod.
 - [ ] **F8 — Global:** i18n ES/EN (hreflang) + visor de precio en USD para extranjeros (usa `titleEn`/`taglineEn`/`descriptionEn` ya en el schema y `toUsdApprox` en `lib/properties.ts`).
+
+## 5b. Estado actual (deploy + git)
+
+- **En producción:** `https://visionestatecolombia.com` (Vercel proyecto `inmobiliaria`, team `seller360grados-projects`). Deploy por CLI: `vercel deploy --prod --yes`.
+- **Git:** repo `juanarangoceo/inmobiliaria`, rama `main` en sync con lo desplegado. Último commit relevante: accesos de navegación (`536aac3`). El proyecto usa **npm** (se borró `pnpm-lock.yaml`).
+- **Pendientes menores:** env var de **preview** en Vercel (bug CLI), renombrar `middleware.ts`→`proxy.ts` (deprecación Next 16), y F8 (i18n/USD).
 
 ## 6. Convenciones
 
