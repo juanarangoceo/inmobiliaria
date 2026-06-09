@@ -50,7 +50,7 @@ export function SiteHeader() {
         <Link href="/" className="flex items-center gap-2.5">
           <div className="size-6 rounded-sm bg-foreground" aria-hidden />
           <span className="font-display text-lg tracking-tight md:text-xl">
-            Habitar
+            Vision Estate
           </span>
         </Link>
 

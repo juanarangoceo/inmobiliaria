@@ -1,9 +1,13 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
-import { PROPERTIES } from "@/lib/properties"
+import { getFeaturedProperties } from "@/lib/sanity/queries"
 import { PropertyCard } from "@/components/property-card"
 
-export function FeaturedProperties() {
+export async function FeaturedProperties() {
+  const properties = await getFeaturedProperties()
+  if (properties.length === 0) return null
+  const top = properties.slice(0, 3)
+  const editorial = properties[3]
   return (
     <section className="relative py-16 md:py-24">
       <div className="mx-auto max-w-[1400px] px-6">
@@ -39,7 +43,7 @@ export function FeaturedProperties() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 gap-x-6 gap-y-12 pt-10 sm:grid-cols-2 lg:grid-cols-3 md:pt-14">
-          {PROPERTIES.slice(0, 3).map((p, i) => (
+          {top.map((p, i) => (
             <PropertyCard key={p.id} property={p} priority={i === 0} />
           ))}
         </div>
@@ -47,7 +51,7 @@ export function FeaturedProperties() {
         {/* Editorial footer row */}
         <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 md:mt-20 md:grid-cols-2">
           <div className="lg:col-span-1">
-            <PropertyCard property={PROPERTIES[3]} />
+            {editorial && <PropertyCard property={editorial} />}
           </div>
           <div className="flex flex-col justify-end">
             <div className="mb-3 flex items-center gap-3">

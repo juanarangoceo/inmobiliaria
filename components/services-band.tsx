@@ -9,7 +9,7 @@ export function ServicesBand() {
         <div className="relative isolate overflow-hidden bg-foreground text-background">
           <Image
             src="/servicios/home-band.jpg"
-            alt="Estudio de asesoría Habitar"
+            alt="Estudio de asesoría Vision Estate"
             fill
             sizes="100vw"
             className="object-cover opacity-45"
@@ -27,7 +27,7 @@ export function ServicesBand() {
                   aria-hidden
                 />
                 <span className="font-mono text-[11px] tracking-[0.32em] text-[color:var(--luxe)] uppercase">
-                  Habitar · Asesoría
+                  Vision Estate · Asesoría
                 </span>
               </div>
 

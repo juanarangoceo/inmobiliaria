@@ -18,7 +18,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { MobileTabBar } from "@/components/mobile-tab-bar"
 
 export const metadata = {
-  title: "Servicios · Asesoría Inmobiliaria — Habitar",
+  title: "Servicios · Asesoría Inmobiliaria — Vision Estate",
   description:
     "Una boutique inmobiliaria para operaciones de alto valor. Representación de venta y compra, valuación patrimonial, producción editorial, asesoría legal y gestión patrimonial.",
 }
@@ -142,7 +142,7 @@ export default function ServiciosPage() {
       <section className="relative isolate h-[100svh] min-h-[680px] w-full overflow-hidden bg-foreground text-background">
         <Image
           src="/servicios/hero.jpg"
-          alt="Estudio de asesoría inmobiliaria Habitar"
+          alt="Estudio de asesoría inmobiliaria Vision Estate"
           fill
           priority
           sizes="100vw"
@@ -160,7 +160,7 @@ export default function ServiciosPage() {
               aria-hidden
             />
             <span className="font-mono text-[11px] tracking-[0.32em] text-[color:var(--luxe)] uppercase">
-              Habitar · Asesoría
+              Vision Estate · Asesoría
             </span>
           </div>
 
@@ -251,7 +251,7 @@ export default function ServiciosPage() {
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src="/servicios/proceso.jpg"
-                  alt="Dossier editorial Habitar"
+                  alt="Dossier editorial Vision Estate"
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"
                   className="object-cover"
@@ -296,7 +296,7 @@ export default function ServiciosPage() {
 
               <div className="mt-10 max-w-xl space-y-5 text-pretty text-base leading-relaxed text-foreground/80 md:text-[17px]">
                 <p>
-                  Habitar nació para resolver un problema muy concreto: en el
+                  Vision Estate nació para resolver un problema muy concreto: en el
                   mercado de inmuebles de alto valor, la confianza se rompe con
                   un detalle. Un anuncio fuera de lugar, un teléfono abierto,
                   una foto mal iluminada — y la operación se desploma.
@@ -308,7 +308,7 @@ export default function ServiciosPage() {
                   senior, un director de producción y un aliado legal dedicado.
                 </p>
                 <p className="font-mono text-[13px] tracking-wide text-muted-foreground">
-                  — Equipo Habitar
+                  — Equipo Vision Estate
                 </p>
               </div>
             </div>
@@ -474,7 +474,7 @@ export default function ServiciosPage() {
               <div className="relative aspect-[16/11] overflow-hidden">
                 <Image
                   src="/servicios/equipo.jpg"
-                  alt="Salón privado de asesoría Habitar"
+                  alt="Salón privado de asesoría Vision Estate"
                   fill
                   sizes="(max-width: 768px) 100vw, 58vw"
                   className="object-cover"
@@ -573,7 +573,7 @@ export default function ServiciosPage() {
               <blockquote className="font-display mt-8 max-w-2xl text-balance text-3xl leading-[1.15] tracking-tight md:text-[44px]">
                 &ldquo;Vendimos la hacienda familiar en ciento cuarenta y dos
                 días, sin salir a portales y sin un solo letrero en la reja.
-                Habitar condujo la operación con la discreción que{" "}
+                Vision Estate condujo la operación con la discreción que{" "}
                 <span className="italic text-[color:var(--luxe)]">
                   exigía la historia
                 </span>{" "}

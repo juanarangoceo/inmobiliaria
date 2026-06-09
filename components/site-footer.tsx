@@ -20,7 +20,7 @@ const groups = [
     ],
   },
   {
-    title: "Habitar",
+    title: "Vision Estate",
     links: [
       { label: "Nosotros", href: "#" },
       { label: "Prensa", href: "#" },
@@ -38,7 +38,7 @@ export function SiteFooter() {
             <Link href="/" className="flex items-center gap-2.5">
               <div className="size-5 rounded-sm bg-foreground" aria-hidden />
               <span className="font-display text-xl tracking-tight">
-                Habitar
+                Vision Estate
               </span>
             </Link>
             <p className="mt-6 max-w-sm text-pretty text-sm leading-relaxed text-muted-foreground">
@@ -93,7 +93,7 @@ export function SiteFooter() {
 
         <div className="mt-16 flex flex-col gap-4 border-t border-foreground/10 pt-6 md:mt-20 md:flex-row md:items-center md:justify-between">
           <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-            © {new Date().getFullYear()} Habitar · Inmuebles de alto valor
+            © {new Date().getFullYear()} Vision Estate · Inmuebles de alto valor
           </p>
           <div className="flex items-center gap-6">
             <Link

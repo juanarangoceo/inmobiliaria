@@ -19,12 +19,18 @@ import { SiteFooter } from "@/components/site-footer"
 import { MobileTabBar } from "@/components/mobile-tab-bar"
 import { PropertyGallery } from "@/components/property-gallery"
 import { PropertyCard } from "@/components/property-card"
-import { PROPERTIES, formatPrice, getPropertyById } from "@/lib/properties"
+import { formatPrice } from "@/lib/properties"
+import {
+  getProperties,
+  getPropertyBySlug,
+  getPropertySlugs,
+} from "@/lib/sanity/queries"
 
 type Params = { id: string }
 
 export async function generateStaticParams() {
-  return PROPERTIES.map((p) => ({ id: p.id }))
+  const slugs = await getPropertySlugs()
+  return slugs.map((id) => ({ id }))
 }
 
 export async function generateMetadata({
@@ -33,10 +39,10 @@ export async function generateMetadata({
   params: Promise<Params>
 }) {
   const { id } = await params
-  const property = getPropertyById(id)
-  if (!property) return { title: "Inmueble · Habitar" }
+  const property = await getPropertyBySlug(id)
+  if (!property) return { title: "Inmueble · Vision Estate Colombia" }
   return {
-    title: `${property.title} · ${property.location} · Habitar`,
+    title: `${property.title} · ${property.location} · Vision Estate Colombia`,
     description: property.tagline,
   }
 }
@@ -47,10 +53,12 @@ export default async function PropertyPage({
   params: Promise<Params>
 }) {
   const { id } = await params
-  const property = getPropertyById(id)
+  const property = await getPropertyBySlug(id)
   if (!property) notFound()
 
-  const related = PROPERTIES.filter((p) => p.id !== property.id).slice(0, 3)
+  const related = (await getProperties())
+    .filter((p) => p.id !== property.id)
+    .slice(0, 3)
 
   return (
     <main className="relative min-h-screen bg-background">
@@ -100,10 +108,12 @@ export default async function PropertyPage({
           <div className="flex flex-col items-start gap-3 md:items-end">
             <div>
               <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                {property.operation === "rent" ? "Renta mensual" : "Precio venta"}
+                Precio venta
               </p>
               <p className="tabular mt-1 font-display text-4xl tracking-tight md:text-5xl">
-                {formatPrice(property.price, property.currency)}
+                {property.priceOnRequest
+                  ? "A consultar"
+                  : formatPrice(property.price, property.currency)}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -356,7 +366,7 @@ export default async function PropertyPage({
                 </div>
                 <div className="flex items-baseline justify-between gap-4">
                   <dt className="text-xs text-muted-foreground">
-                    Score Habitar
+                    Score Vision Estate
                   </dt>
                   <dd className="tabular font-mono text-sm">9.2 / 10</dd>
                 </div>
@@ -372,7 +382,7 @@ export default async function PropertyPage({
                     aria-hidden
                   />
                   <span className="font-mono text-[10px] tracking-[0.22em] text-[color:var(--luxe)] uppercase">
-                    Habitar · Asesoría
+                    Vision Estate · Asesoría
                   </span>
                 </div>
                 <p className="font-display mt-4 text-balance text-[22px] leading-snug tracking-tight md:text-2xl">

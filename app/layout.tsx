@@ -25,7 +25,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Habitar — Inmuebles curados con inteligencia",
+  title: "Vision Estate — Inmuebles curados con inteligencia",
   description:
     "Plataforma inmobiliaria impulsada por IA. Leads precalificados, inmuebles verificados y acceso VIP a propiedades exclusivas.",
   generator: "v0.app",

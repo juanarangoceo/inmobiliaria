@@ -112,10 +112,12 @@ export function PropertyCard({
           </div>
           <div className="text-right">
             <div className="tabular font-mono text-sm font-medium tracking-tight text-foreground">
-              {formatPrice(property.price, property.currency)}
+              {property.priceOnRequest
+                ? "A consultar"
+                : formatPrice(property.price, property.currency)}
             </div>
             <div className="text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
-              {property.operation === "rent" ? "/ mes" : "venta"}
+              venta
             </div>
           </div>
         </div>

@@ -13,17 +13,19 @@ import { SiteFooter } from "@/components/site-footer"
 import { MobileTabBar } from "@/components/mobile-tab-bar"
 import { VipPropertyCard } from "@/components/vip-property-card"
 import { VipChatbot } from "@/components/vip-chatbot"
-import { VIP_PROPERTIES, formatPrice } from "@/lib/properties"
+import { formatPrice } from "@/lib/properties"
+import { getVipProperties } from "@/lib/sanity/queries"
 
 export const metadata = {
-  title: "VIP · Colección Privada — Habitar",
+  title: "VIP · Colección Privada — Vision Estate Colombia",
   description:
-    "Inmuebles off-market, recorrido 360° inmersivo, concierge IA Aster y videollamada al instante con agente virtual. Publicación VIP para propietarios.",
+    "Inmuebles off-market, recorrido 360° inmersivo, concierge IA y videollamada al instante con agente virtual. Publicación VIP para propietarios.",
 }
 
-export default function VipPage() {
-  const featured = VIP_PROPERTIES[0]
-  const rest = VIP_PROPERTIES.slice(1)
+export default async function VipPage() {
+  const vipProperties = await getVipProperties()
+  const featured = vipProperties[0]
+  const rest = vipProperties.slice(1)
 
   return (
     <main className="relative bg-background text-foreground">
@@ -33,7 +35,7 @@ export default function VipPage() {
       <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
         <Image
           src="/landings/vip-collection.jpg"
-          alt="Colección Privada Habitar VIP"
+          alt="Colección Privada Vision Estate VIP"
           fill
           priority
           sizes="100vw"
@@ -118,7 +120,7 @@ export default function VipPage() {
           <div className="mx-auto flex max-w-[1400px] items-center justify-between border-t border-white/15 px-6 py-4 font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">
             <span>Vol. 01 — Primavera 2026</span>
             <span className="hidden md:inline">
-              {VIP_PROPERTIES.length} inmuebles disponibles
+              {vipProperties.length} inmuebles disponibles
             </span>
             <span>Publicar sólo por invitación</span>
           </div>
@@ -239,7 +241,7 @@ export default function VipPage() {
                 Aster. Disponible 24/7, sin agenda.
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Entrenada con la totalidad del catálogo privado de Habitar.
+                Entrenada con la totalidad del catálogo privado de Vision Estate.
                 Comprende criterios sutiles —orientación, materialidad,
                 privacidad— y filtra antes de que usted invierta tiempo.
               </p>
@@ -431,7 +433,7 @@ export default function VipPage() {
               </h2>
             </div>
             <div className="flex items-center gap-6 font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
-              <span>{VIP_PROPERTIES.length} piezas</span>
+              <span>{vipProperties.length} piezas</span>
               <span>Actualizado hoy</span>
             </div>
           </div>

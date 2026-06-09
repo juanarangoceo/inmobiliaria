@@ -20,3 +20,7 @@ node_modules
 
 # Zip exports
 *.zip
+.vercel
+
+# TypeScript build cache
+*.tsbuildinfo

@@ -15,7 +15,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { MobileTabBar } from "@/components/mobile-tab-bar"
 
 export const metadata = {
-  title: "Publicar en VIP · Habitar",
+  title: "Publicar en VIP · Vision Estate",
   description:
     "Producción editorial, recorrido 360° profesional, concierge IA y distribución privada. Publicación reservada a inmuebles de alto valor.",
 }
@@ -101,7 +101,7 @@ const PRODUCTION = [
   {
     icon: ShieldCheck,
     t: "Verificación legal",
-    d: "Antes de publicar revisamos títulos, gravámenes, uso de suelo y cumplimiento fiscal. Cada listado lleva el sello Habitar Verified.",
+    d: "Antes de publicar revisamos títulos, gravámenes, uso de suelo y cumplimiento fiscal. Cada listado lleva el sello Vision Estate Verified.",
   },
   {
     icon: FileSignature,
@@ -140,7 +140,7 @@ export default function PublicarPage() {
             </h1>
 
             <p className="mt-8 max-w-lg text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              La publicación en Habitar VIP es un servicio curado y de pago.
+              La publicación en Vision Estate VIP es un servicio curado y de pago.
               Producimos su inmueble al nivel de una obra editorial y lo
               distribuimos en privado a una red verificada de compradores.
             </p>
@@ -188,7 +188,7 @@ export default function PublicarPage() {
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
                 src="/landings/publicar-vip.jpg"
-                alt="Oficina privada · Habitar"
+                alt="Oficina privada · Vision Estate"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"

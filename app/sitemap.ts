@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next"
-import { PROPERTIES } from "@/lib/properties"
+import { getPropertySlugs } from "@/lib/sanity/queries"
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "https://habitar.mx"
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const base =
+    process.env.NEXT_PUBLIC_BASE_URL ?? "https://visionestatecolombia.com"
 
-  const properties: MetadataRoute.Sitemap = PROPERTIES.map((p) => ({
-    url: `${base}/propiedades/${p.id}`,
+  const slugs = await getPropertySlugs()
+  const properties: MetadataRoute.Sitemap = slugs.map((slug) => ({
+    url: `${base}/propiedades/${slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
