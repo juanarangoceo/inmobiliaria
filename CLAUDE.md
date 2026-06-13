@@ -1,7 +1,7 @@
 # Vision Estate Colombia — Bitácora del proyecto
 
 > Documento vivo. Se actualiza al cerrar cada fase o cambio relevante para que cualquiera
-> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-13 (build original F1–F7 EN PRODUCCIÓN; **PLAN MAESTRO en ejecución**: Fases 1, 2 y 4 cerradas + Fase 3 parcial — ver §9).
+> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-13 (build original F1–F7 EN PRODUCCIÓN; **PLAN MAESTRO en ejecución**: Fases 1, 2, 4 y 5 cerradas + Fase 3 parcial — ver §9).
 
 ---
 
@@ -177,6 +177,23 @@ Web lee SOLO publicados (next-sanity, ISR)
     crear el webhook en Sanity apuntando a `/api/revalidate`.
 - **Deuda submitProperty ✅:** insert a Supabase `submissions` ahora en try/catch (ya no
   crashea ni deja docs huérfanos); + consentimiento obligatorio.
+- **Fase 5 — Home revista + TikTok ✅**
+  - **Waitlist:** tabla Supabase `public.waitlist` (RLS: insert anon+authenticated, lectura
+    solo service role) + `lib/leads/actions.ts` (`joinWaitlist`) + `components/waitlist-form.tsx`
+    (reutilizable, con consentimiento).
+  - **Home en actos:** `app/page.tsx` = Hero (portada 1 propiedad) → `FeaturedProperties`
+    → **`TerritoriosSection`** (bloques por región con conteo real, data-driven) →
+    **`TikTokBridge`** ("Visto en @visionestatecolombia", gancho + captura waitlist) →
+    `ServicesBand`.
+  - **`featuredFromTikTok`** añadido al schema `propiedad.ts` (grupo admin) + query
+    `getTikTokFeatured()`. Para activar la sección: marcar una propiedad en /studio.
+  - **CTAs de simuladas → waitlist** (§2.4): campo derivado `isSimulated` (= sin
+    `submittedByUserId`) en `queries.ts`/`Property`. En la ficha, si es simulada el sidebar
+    muestra captura waitlist ("Solicitar acceso anticipado"); si es real, el form de contacto
+    (placeholder +57). **CTA sticky móvil** (un solo CTA primario) sobre la tab bar.
+  - Quitado el bloque fabricado "Análisis IA de inversión" de la ficha (§2.5 + honestidad)
+    → panel "Verificado por curaduría". Wording "seleccionadas por IA" → "de la colección".
+  - Nueva ruta **`/coleccion`** (link en bio TikTok): grid completo + captura waitlist.
 
 ### Parcial / pendiente
 - **Fase 3 — Diseño (PARCIAL):** hechos → token `--luxe-ink` (bronce p/ texto sobre claro)
@@ -187,12 +204,16 @@ Web lee SOLO publicados (next-sanity, ISR)
   `--luxe` debe quedarse) y demás archivos (quedan ~40 usos de `text-[color:var(--luxe)]`);
   piso tipográfico 11px global; `/vip` dark forzado (evaluado, no aplicado por riesgo);
   estados táctiles de hover.
-- **Fases 5–9 PENDIENTES.** Próximo: **Fase 5** — tabla Supabase `waitlist` (migración vía
-  `mcp__supabase-vision-local`), `components/waitlist-form.tsx`, CTAs de simuladas→waitlist,
-  home en 4 actos + Territorios, campo `featuredFromTikTok` en schema, `/coleccion`, ficha
-  en capítulos. Luego 6 (acceso landing VIP), 7 (GEO: schemas territorio/respuesta/informe +
+- **Fase 5 refinamiento pendiente:** ficha "en capítulos" (La llegada → Los espacios → El
+  entorno → La inversión) NO hecha; la ficha conserva su nota editorial actual de un solo
+  cuerpo. `TerritoriosSection` enlaza a la 1ª propiedad de cada región (Fase 7 añade
+  `/territorios/[slug]`).
+- **Fases 6–9 PENDIENTES.** Próximo: **Fase 6** — en `/cuenta` botón "Ver/Copiar enlace"
+  de la landing VIP por propiedad; en ficha pública VIP botón "Ver presentación privada"
+  (si `isVip && existe vipLanding`). Luego 7 (GEO: schemas territorio/respuesta/informe +
   `/respuestas` + Cron Gemini→cola), 8 (`/en` + hreflang), 9 (Círculo + drops + vendida).
 - **SMTP Resend** (deuda §2.8): config externa en Supabase dashboard (no código).
 
-### Verificación de este lote
-`tsc --noEmit` ✅ · `next build` ✅ (25 rutas). Pendiente smoke móvil 390px en prod.
+### Verificación
+`tsc --noEmit` ✅ · `next build` ✅ (26 rutas tras Fase 5). Pendiente smoke móvil 390px en prod.
+Tabla `waitlist` con RLS verificada (policy `waitlist_public_insert` para anon+authenticated).

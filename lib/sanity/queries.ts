@@ -29,6 +29,8 @@ type SanityProp = {
   has360?: boolean
   priceOnRequest?: boolean
   featured?: boolean
+  featuredFromTikTok?: boolean
+  isSimulated?: boolean
   tagline?: string
   taglineEn?: string
   description?: Array<{ children?: Array<{ text?: string }> }>
@@ -46,7 +48,8 @@ const FIELDS = /* groq */ `
   code, title, titleEn, location, city, region,
   price, currency, propertyType,
   bedrooms, bathrooms, area, parking, year,
-  isVip, vipTier, has360, priceOnRequest, featured,
+  isVip, vipTier, has360, priceOnRequest, featured, featuredFromTikTok,
+  "isSimulated": !defined(submittedByUserId),
   tagline, taglineEn, features, amenities, geo, agent,
   description,
   "image": mainImage.asset->url,
@@ -107,6 +110,8 @@ function toProperty(p: SanityProp): Property {
     has360: p.has360,
     offMarket: p.vipTier === "off-market",
     priceOnRequest: p.priceOnRequest,
+    featuredFromTikTok: p.featuredFromTikTok,
+    isSimulated: p.isSimulated,
     tagline: p.tagline ?? "",
     description: blocksToText(p.description),
     features: p.features ?? [],
@@ -160,6 +165,15 @@ export async function getVipProperties(): Promise<Property[]> {
     { next: { revalidate: REVALIDATE } },
   )
   return docs.map(toProperty)
+}
+
+export async function getTikTokFeatured(): Promise<Property | null> {
+  const doc = await sanityClient.fetch<SanityProp | null>(
+    `*[${PUBLISHED} && featuredFromTikTok == true] | order(_createdAt desc)[0]{${FIELDS}}`,
+    {},
+    { next: { revalidate: REVALIDATE } },
+  )
+  return doc ? toProperty(doc) : null
 }
 
 export async function getPropertyBySlug(slug: string): Promise<Property | null> {

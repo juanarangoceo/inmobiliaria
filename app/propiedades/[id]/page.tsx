@@ -19,6 +19,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { MobileTabBar } from "@/components/mobile-tab-bar"
 import { PropertyGallery } from "@/components/property-gallery"
 import { PropertyCard } from "@/components/property-card"
+import { WaitlistForm } from "@/components/waitlist-form"
 import { formatPrice } from "@/lib/properties"
 import {
   getProperties,
@@ -313,94 +314,95 @@ export default async function PropertyPage({
                 </div>
               </div>
 
-              <form className="mt-8 space-y-3">
-                <label className="flex flex-col gap-1.5">
-                  <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
-                    Nombre
-                  </span>
-                  <input
-                    type="text"
-                    placeholder="Tu nombre"
-                    className="h-11 rounded-md border border-foreground/15 bg-background px-3 text-sm focus:border-foreground/40 focus:outline-none"
-                  />
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  <label className="flex flex-col gap-1.5">
-                    <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
-                      Email
-                    </span>
-                    <input
-                      type="email"
-                      placeholder="tu@email.com"
-                      className="h-11 rounded-md border border-foreground/15 bg-background px-3 text-sm focus:border-foreground/40 focus:outline-none"
+              {property.isSimulated ? (
+                <div className="mt-8 scroll-mt-24" id="ficha-cta">
+                  <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
+                    Acceso a la colección
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Déjanos tu correo y te damos acceso anticipado y
+                    propiedades similares de la colección.
+                  </p>
+                  <div className="mt-5">
+                    <WaitlistForm
+                      source="ficha"
+                      propertyRef={property.id}
+                      cta="Solicitar acceso anticipado"
                     />
-                  </label>
-                  <label className="flex flex-col gap-1.5">
-                    <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
-                      Teléfono
-                    </span>
-                    <input
-                      type="tel"
-                      placeholder="+52"
-                      className="h-11 rounded-md border border-foreground/15 bg-background px-3 text-sm focus:border-foreground/40 focus:outline-none"
-                    />
-                  </label>
+                  </div>
                 </div>
-                <label className="flex flex-col gap-1.5">
-                  <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
-                    Mensaje
-                  </span>
-                  <textarea
-                    rows={3}
-                    defaultValue={`Hola, me interesa ${property.title} (${property.code}). ¿Podemos coordinar una visita?`}
-                    className="rounded-md border border-foreground/15 bg-background p-3 text-sm focus:border-foreground/40 focus:outline-none"
-                  />
-                </label>
+              ) : (
+                <form className="mt-8 space-y-3 scroll-mt-24" id="ficha-cta">
+                  <label className="flex flex-col gap-1.5">
+                    <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
+                      Nombre
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Tu nombre"
+                      className="h-11 rounded-md border border-foreground/15 bg-background px-3 text-sm focus:border-foreground/40 focus:outline-none"
+                    />
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <label className="flex flex-col gap-1.5">
+                      <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
+                        Email
+                      </span>
+                      <input
+                        type="email"
+                        placeholder="tu@email.com"
+                        className="h-11 rounded-md border border-foreground/15 bg-background px-3 text-sm focus:border-foreground/40 focus:outline-none"
+                      />
+                    </label>
+                    <label className="flex flex-col gap-1.5">
+                      <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
+                        Teléfono
+                      </span>
+                      <input
+                        type="tel"
+                        placeholder="+57"
+                        className="h-11 rounded-md border border-foreground/15 bg-background px-3 text-sm focus:border-foreground/40 focus:outline-none"
+                      />
+                    </label>
+                  </div>
+                  <label className="flex flex-col gap-1.5">
+                    <span className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
+                      Mensaje
+                    </span>
+                    <textarea
+                      rows={3}
+                      defaultValue={`Hola, me interesa ${property.title} (${property.code}). ¿Podemos coordinar una visita?`}
+                      className="rounded-md border border-foreground/15 bg-background p-3 text-sm focus:border-foreground/40 focus:outline-none"
+                    />
+                  </label>
 
-                <button
-                  type="submit"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-background hover:opacity-90"
-                >
-                  Agendar visita privada
-                  <ArrowUpRight className="size-4" strokeWidth={1.5} />
-                </button>
-                <button
-                  type="button"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-foreground/15 px-6 py-3.5 text-sm font-medium hover:border-foreground/40"
-                >
-                  Chat por WhatsApp
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-background hover:opacity-90"
+                  >
+                    Agendar visita privada
+                    <ArrowUpRight className="size-4" strokeWidth={1.5} />
+                  </button>
+                </form>
+              )}
             </div>
 
-            {/* AI summary */}
+            {/* Verificación por curaduría */}
             <div className="mt-6 rounded-2xl border border-foreground/10 bg-background p-6">
               <div className="flex items-center gap-2">
-                <Sparkles className="size-4 text-foreground/70" strokeWidth={1.5} />
+                <ShieldCheck
+                  className="size-4 text-foreground/70"
+                  strokeWidth={1.5}
+                />
                 <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                  Análisis IA de inversión
+                  Verificado por curaduría
                 </p>
               </div>
-              <dl className="mt-5 space-y-3">
-                <div className="flex items-baseline justify-between gap-4 border-b border-foreground/10 pb-3">
-                  <dt className="text-xs text-muted-foreground">
-                    Precio vs. zona
-                  </dt>
-                  <dd className="tabular font-mono text-sm">-3.2%</dd>
-                </div>
-                <div className="flex items-baseline justify-between gap-4 border-b border-foreground/10 pb-3">
-                  <dt className="text-xs text-muted-foreground">
-                    Apreciación 5 años
-                  </dt>
-                  <dd className="tabular font-mono text-sm">+42%</dd>
-                </div>
-                <div className="flex items-baseline justify-between gap-4">
-                  <dt className="text-xs text-muted-foreground">
-                    Score Vision Estate
-                  </dt>
-                  <dd className="tabular font-mono text-sm">9.2 / 10</dd>
-                </div>
-              </dl>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Cada propiedad de la colección pasa por revisión y aprobación
+                manual de nuestro equipo antes de publicarse. Solo venta, sin
+                ruido.
+              </p>
             </div>
 
             {/* Services cross-sell */}
@@ -454,7 +456,7 @@ export default async function PropertyPage({
               </span>
             </div>
             <h2 className="font-display text-3xl leading-tight tracking-tight md:text-4xl">
-              Piezas similares seleccionadas por IA
+              Piezas similares de la colección
             </h2>
           </div>
           <Link
@@ -475,7 +477,28 @@ export default async function PropertyPage({
       </section>
 
       <SiteFooter />
-      <div className="h-24 md:h-0" aria-hidden />
+      <div className="h-32 md:h-0" aria-hidden />
+
+      {/* CTA sticky (solo móvil, sobre la tab bar): un único CTA primario */}
+      <div className="fixed inset-x-0 bottom-[5.25rem] z-40 px-4 md:hidden">
+        <a
+          href="#ficha-cta"
+          className="mx-auto flex max-w-sm items-center justify-between gap-3 rounded-full bg-foreground px-5 py-3.5 text-background shadow-2xl shadow-black/20"
+        >
+          <span className="min-w-0">
+            <span className="block truncate font-display text-sm tracking-tight">
+              {property.priceOnRequest
+                ? "Precio a consultar"
+                : formatPrice(property.price, property.currency)}
+            </span>
+          </span>
+          <span className="inline-flex flex-shrink-0 items-center gap-1.5 text-xs font-medium">
+            {property.isSimulated ? "Solicitar acceso" : "Agendar visita"}
+            <ArrowUpRight className="size-4" strokeWidth={1.5} />
+          </span>
+        </a>
+      </div>
+
       <MobileTabBar />
     </main>
   )

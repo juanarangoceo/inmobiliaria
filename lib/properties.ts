@@ -23,6 +23,8 @@ export type Property = {
   has360?: boolean
   offMarket?: boolean
   priceOnRequest?: boolean
+  featuredFromTikTok?: boolean
+  isSimulated?: boolean
   year: number
   parking: number
   tagline: string

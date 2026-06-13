@@ -1,6 +1,8 @@
 import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
 import { FeaturedProperties } from "@/components/featured-properties"
+import { TerritoriosSection } from "@/components/territorios-section"
+import { TikTokBridge } from "@/components/tiktok-bridge"
 import { ServicesBand } from "@/components/services-band"
 import { MobileTabBar } from "@/components/mobile-tab-bar"
 import { SiteFooter } from "@/components/site-footer"
@@ -11,6 +13,8 @@ export default function Page() {
       <SiteHeader />
       <HeroSection />
       <FeaturedProperties />
+      <TerritoriosSection />
+      <TikTokBridge />
       <ServicesBand />
       <SiteFooter />
 

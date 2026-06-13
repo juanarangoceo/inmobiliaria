@@ -54,6 +54,15 @@ export const propiedad = defineType({
       group: "admin",
       initialValue: false,
     }),
+    defineField({
+      name: "featuredFromTikTok",
+      title: "Mostrar en \"Visto en @visionestatecolombia\"",
+      type: "boolean",
+      group: "admin",
+      description:
+        "Propiedad del último carrusel de TikTok; aparece en la sección puente de la home.",
+      initialValue: false,
+    }),
 
     // ── General ─────────────────────────────────────────────────────────────
     defineField({
