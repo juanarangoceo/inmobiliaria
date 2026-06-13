@@ -44,7 +44,7 @@ export default async function CuentaPage() {
     <main className="mx-auto min-h-dvh max-w-3xl px-6 py-16">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--luxe)]">
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--luxe-ink)]">
             Mi cuenta
           </p>
           <h1 className="font-display mt-2 text-3xl tracking-tight">

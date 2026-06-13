@@ -33,7 +33,7 @@ export default async function PublicarPropiedadPage() {
         </Link>
 
         <div className="mt-8 mb-12">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--luxe)]">
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--luxe-ink)]">
             Portal gratuito
           </p>
           <h1 className="font-display mt-3 text-4xl tracking-tight md:text-5xl">

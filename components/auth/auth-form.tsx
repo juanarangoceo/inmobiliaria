@@ -19,7 +19,7 @@ export function AuthForm() {
   return (
     <div className="w-full max-w-sm">
       <div className="mb-8 text-center">
-        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[color:var(--luxe)]">
+        <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--luxe-ink)]">
           Vision Estate Colombia
         </p>
         <h1 className="font-display mt-3 text-2xl tracking-tight">
@@ -79,7 +79,7 @@ export function AuthForm() {
         <button
           type="button"
           onClick={() => setMode(mode === "login" ? "signup" : "login")}
-          className="font-medium text-foreground underline underline-offset-4 hover:text-[color:var(--luxe)]"
+          className="font-medium text-foreground underline underline-offset-4 hover:text-[color:var(--luxe-ink)]"
         >
           {mode === "login" ? "Regístrate" : "Inicia sesión"}
         </button>

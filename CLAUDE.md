@@ -205,14 +205,22 @@ Web lee SOLO publicados (next-sanity, ISR)
     solo si `isVip && existe vipLanding publicada`.
 
 ### Parcial / pendiente
-- **Fase 3 — Diseño (PARCIAL):** hechos → token `--luxe-ink` (bronce p/ texto sobre claro)
-  en `globals.css` + `@theme`; 3 recetas de scrim (`.scrim-hero/.scrim-card/.scrim-band`)
-  aplicadas en hero/card/services-band; tab bar móvil → **Home/VIP/Publicar/Cuenta**;
-  `--luxe-ink` aplicado en home (`featured-properties`) y `/publicar`.
-  **Falta:** barrido `--luxe-ink` en `servicios` (¡cuidado! tiene bandas oscuras donde
-  `--luxe` debe quedarse) y demás archivos (quedan ~40 usos de `text-[color:var(--luxe)]`);
-  piso tipográfico 11px global; `/vip` dark forzado (evaluado, no aplicado por riesgo);
-  estados táctiles de hover.
+- **Fase 3 — Diseño (CASI COMPLETA):** hechos → token `--luxe-ink` (bronce p/ texto sobre
+  claro) en `globals.css` + `@theme`; 3 recetas de scrim (`.scrim-hero/.scrim-card/.scrim-band`)
+  aplicadas en hero/card/services-band/territorios/tiktok-bridge; tab bar móvil →
+  **Home/VIP/Publicar/Cuenta**.
+  - **Barrido `--luxe-ink` hecho** en archivos sobre fondo claro: `featured-properties`,
+    `/publicar` (eyebrows), `servicios` (eyebrows/iconos/números de secciones claras),
+    `submit-form` (asteriscos), `auth-form`, `cuenta`, `publicar/propiedad`. **Se dejó `--luxe`
+    a propósito** en zonas oscuras: `/vip`, `vip-property-card`, `vip-chatbot`, banda de
+    `services-band`, hero+caso de `servicios` (`bg-foreground`), cross-sell de la ficha, y el
+    **header** (transparente sobre el hero oscuro de /vip; ahí el dorado brillante es más legible).
+  - **Estado táctil:** el gradiente hover de `vip-property-card` ahora es visible por defecto
+    (`opacity-75` → `100` en hover), legible en móvil.
+  - **Glass:** auditado — solo en chrome flotante (header, tab bar, botón favorito). OK.
+  **Falta (menor):** piso tipográfico 11px **completo** (subí los eyebrows tocados a 11px,
+  pero quedan muchos `text-[10px]` mono informativos por revisar caso a caso); normalizar el
+  hero de `/vip` (aún apila scrims); **`/vip` dark forzado** (punto 5, a decisión de Juan).
 - **Fase 5 refinamiento pendiente:** ficha "en capítulos" (La llegada → Los espacios → El
   entorno → La inversión) NO hecha; la ficha conserva su nota editorial actual de un solo
   cuerpo. `TerritoriosSection` enlaza a la 1ª propiedad de cada región (Fase 7 añade

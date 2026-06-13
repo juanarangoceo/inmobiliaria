@@ -41,7 +41,7 @@ function Field({
     <div className="space-y-1.5">
       <Label htmlFor={name}>
         {label}
-        {required && <span className="text-[color:var(--luxe)]"> *</span>}
+        {required && <span className="text-[color:var(--luxe-ink)]"> *</span>}
       </Label>
       <Input id={name} name={name} type={type} required={required} placeholder={placeholder} />
     </div>
@@ -54,7 +54,7 @@ export function SubmitForm() {
   if (state.ok) {
     return (
       <div className="mx-auto max-w-md rounded-2xl border border-[color:var(--luxe)]/25 bg-card px-8 py-12 text-center">
-        <CheckCircle2 className="mx-auto size-10 text-[color:var(--luxe)]" strokeWidth={1.5} />
+        <CheckCircle2 className="mx-auto size-10 text-[color:var(--luxe-ink)]" strokeWidth={1.5} />
         <h2 className="font-display mt-5 text-2xl tracking-tight">¡Recibimos tu propiedad!</h2>
         <p className="mt-3 text-sm text-muted-foreground">
           Quedó en revisión. Nuestro equipo la aprobará antes de publicarla. Puedes
@@ -78,7 +78,7 @@ export function SubmitForm() {
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="space-y-1.5">
             <Label htmlFor="propertyType">
-              Tipo de inmueble <span className="text-[color:var(--luxe)]">*</span>
+              Tipo de inmueble <span className="text-[color:var(--luxe-ink)]">*</span>
             </Label>
             <select
               id="propertyType"
@@ -159,7 +159,7 @@ export function SubmitForm() {
         </h2>
         <div className="space-y-1.5">
           <Label htmlFor="mainImage">
-            Foto principal <span className="text-[color:var(--luxe)]">*</span>
+            Foto principal <span className="text-[color:var(--luxe-ink)]">*</span>
           </Label>
           <Input id="mainImage" name="mainImage" type="file" accept="image/*" required />
         </div>

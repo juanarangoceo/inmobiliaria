@@ -281,7 +281,7 @@ export default function ServiciosPage() {
                   className="h-px w-8 bg-[color:var(--luxe)]/70"
                   aria-hidden
                 />
-                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
+                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
                   Manifiesto · 01
                 </span>
               </div>
@@ -329,7 +329,7 @@ export default function ServiciosPage() {
                   className="h-px w-8 bg-[color:var(--luxe)]/70"
                   aria-hidden
                 />
-                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
+                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
                   Portafolio · 02
                 </span>
               </div>
@@ -358,7 +358,7 @@ export default function ServiciosPage() {
                 >
                   <div className="flex items-start justify-between">
                     <Icon
-                      className="size-6 text-foreground/70 transition-colors group-hover:text-[color:var(--luxe)]"
+                      className="size-6 text-foreground/70 transition-colors group-hover:text-[color:var(--luxe-ink)]"
                       strokeWidth={1.25}
                     />
                     <span className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground tabular uppercase">
@@ -383,7 +383,7 @@ export default function ServiciosPage() {
                         className="flex items-start gap-3 text-[13px] leading-snug text-foreground/85"
                       >
                         <CheckCircle2
-                          className="mt-0.5 size-3.5 flex-shrink-0 text-[color:var(--luxe)]"
+                          className="mt-0.5 size-3.5 flex-shrink-0 text-[color:var(--luxe-ink)]"
                           strokeWidth={1.5}
                         />
                         <span>{b}</span>
@@ -393,7 +393,7 @@ export default function ServiciosPage() {
 
                   <Link
                     href="#contacto"
-                    className="mt-8 inline-flex items-center gap-2 self-start font-mono text-[10px] tracking-[0.22em] text-foreground uppercase transition-colors hover:text-[color:var(--luxe)]"
+                    className="mt-8 inline-flex items-center gap-2 self-start font-mono text-[11px] tracking-[0.22em] text-foreground uppercase transition-colors hover:text-[color:var(--luxe-ink)]"
                   >
                     Solicitar esta práctica
                     <ArrowRight
@@ -417,7 +417,7 @@ export default function ServiciosPage() {
                 className="h-px w-8 bg-[color:var(--luxe)]/70"
                 aria-hidden
               />
-              <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
+              <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
                 Método · 03
               </span>
             </div>
@@ -441,7 +441,7 @@ export default function ServiciosPage() {
                   <span className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
                     Etapa
                   </span>
-                  <span className="font-display text-3xl tracking-tight tabular text-[color:var(--luxe)] md:text-4xl">
+                  <span className="font-display text-3xl tracking-tight tabular text-[color:var(--luxe-ink)] md:text-4xl">
                     {p.step}
                   </span>
                 </div>
@@ -455,7 +455,7 @@ export default function ServiciosPage() {
                 {i < process.length - 1 && (
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute -right-3 top-1/2 hidden size-6 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/15 bg-background text-[color:var(--luxe)] md:inline-flex"
+                    className="pointer-events-none absolute -right-3 top-1/2 hidden size-6 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/15 bg-background text-[color:var(--luxe-ink)] md:inline-flex"
                   >
                     <ArrowRight className="size-3" strokeWidth={1.75} />
                   </span>
@@ -512,7 +512,7 @@ export default function ServiciosPage() {
                     className="h-px w-8 bg-[color:var(--luxe)]/70"
                     aria-hidden
                   />
-                  <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
+                  <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
                     El equipo · 04
                   </span>
                 </div>
@@ -650,7 +650,7 @@ export default function ServiciosPage() {
                   className="h-px w-8 bg-[color:var(--luxe)]/70"
                   aria-hidden
                 />
-                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
+                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
                   Agendar · 05
                 </span>
               </div>

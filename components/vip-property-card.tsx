@@ -100,10 +100,10 @@ export function VipPropertyCard({ property, size = "default", priority }: Props)
             </div>
           )}
 
-          {/* Hover gradient */}
+          {/* Scrim: visible por defecto (legible en táctil) y reforzado en hover */}
           <div
             aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            className="scrim-card pointer-events-none absolute inset-0 opacity-75 transition-opacity duration-500 group-hover:opacity-100"
           />
         </div>
 
