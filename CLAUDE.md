@@ -1,7 +1,7 @@
 # Vision Estate Colombia — Bitácora del proyecto
 
 > Documento vivo. Se actualiza al cerrar cada fase o cambio relevante para que cualquiera
-> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-13 (build original F1–F7 EN PRODUCCIÓN; **PLAN MAESTRO en ejecución**: Fases 1, 2, 4 y 5 cerradas + Fase 3 parcial — ver §9).
+> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-13 (build original F1–F7 EN PRODUCCIÓN; **PLAN MAESTRO en ejecución**: Fases 1, 2, 4, 5 y 6 cerradas + Fase 3 parcial — ver §9).
 
 ---
 
@@ -194,6 +194,15 @@ Web lee SOLO publicados (next-sanity, ISR)
   - Quitado el bloque fabricado "Análisis IA de inversión" de la ficha (§2.5 + honestidad)
     → panel "Verificado por curaduría". Wording "seleccionadas por IA" → "de la colección".
   - Nueva ruta **`/coleccion`** (link en bio TikTok): grid completo + captura waitlist.
+- **Fase 6 — Acceso a la landing VIP ✅**
+  - Queries nuevas en `queries.ts`: `getVipLandingSlugForPropertySlug(slug)` y
+    `getVipLandingMapForPropertyIds(ids)` (mapea propiedad `_id` → landing slug vía
+    `property._ref`).
+  - **`/cuenta`**: por cada propiedad con landing VIP publicada → "Ver mi landing"
+    (`_blank`) + **"Copiar enlace"** (`components/copy-link-button.tsx`, clipboard).
+    El select de `submissions` ahora trae `sanity_doc_id`.
+  - **Ficha pública VIP**: botón discreto "Ver presentación privada" (`_blank`),
+    solo si `isVip && existe vipLanding publicada`.
 
 ### Parcial / pendiente
 - **Fase 3 — Diseño (PARCIAL):** hechos → token `--luxe-ink` (bronce p/ texto sobre claro)
@@ -208,12 +217,14 @@ Web lee SOLO publicados (next-sanity, ISR)
   entorno → La inversión) NO hecha; la ficha conserva su nota editorial actual de un solo
   cuerpo. `TerritoriosSection` enlaza a la 1ª propiedad de cada región (Fase 7 añade
   `/territorios/[slug]`).
-- **Fases 6–9 PENDIENTES.** Próximo: **Fase 6** — en `/cuenta` botón "Ver/Copiar enlace"
-  de la landing VIP por propiedad; en ficha pública VIP botón "Ver presentación privada"
-  (si `isVip && existe vipLanding`). Luego 7 (GEO: schemas territorio/respuesta/informe +
-  `/respuestas` + Cron Gemini→cola), 8 (`/en` + hreflang), 9 (Círculo + drops + vendida).
+- **Fases 7–9 PENDIENTES.** Próximo: **Fase 7** — GEO: schemas Sanity
+  `territorio`/`respuesta`/`informe` (+ registrar en `index.ts` y `structure.ts`),
+  hub `/respuestas` (FAQPage), `/territorios/[slug]`, pipeline Vercel Cron → Gemini genera
+  borradores `status=pending` → cola Studio → webhook revalidate. Luego 8 (`/en` + hreflang +
+  selector ES/EN + precio ≈USD), 9 (Círculo + drops trimestrales + estado `vendida` +
+  View Transitions).
 - **SMTP Resend** (deuda §2.8): config externa en Supabase dashboard (no código).
 
 ### Verificación
-`tsc --noEmit` ✅ · `next build` ✅ (26 rutas tras Fase 5). Pendiente smoke móvil 390px en prod.
+`tsc --noEmit` ✅ · `next build` ✅ (26 rutas tras Fases 5–6). Pendiente smoke móvil 390px en prod.
 Tabla `waitlist` con RLS verificada (policy `waitlist_public_insert` para anon+authenticated).

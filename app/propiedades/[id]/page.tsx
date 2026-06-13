@@ -25,6 +25,7 @@ import {
   getProperties,
   getPropertyBySlug,
   getPropertySlugs,
+  getVipLandingSlugForPropertySlug,
 } from "@/lib/sanity/queries"
 import {
   propertyToJsonLd,
@@ -78,6 +79,11 @@ export default async function PropertyPage({
   const { id } = await params
   const property = await getPropertyBySlug(id)
   if (!property) notFound()
+
+  // Presentación privada (landing white-label) si la propiedad VIP tiene una.
+  const vipLandingSlug = property.isVip
+    ? await getVipLandingSlugForPropertySlug(id)
+    : null
 
   const related = (await getProperties())
     .filter((p) => p.id !== property.id)
@@ -163,6 +169,23 @@ export default async function PropertyPage({
                 Compartir
               </button>
             </div>
+            {vipLandingSlug && (
+              <a
+                href={`/v/${vipLandingSlug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-[color:var(--luxe-ink)]"
+              >
+                <Sparkles className="size-3.5 text-[color:var(--luxe-ink)]" strokeWidth={1.5} />
+                <span className="font-mono tracking-[0.18em] uppercase">
+                  Ver presentación privada
+                </span>
+                <ArrowUpRight
+                  className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  strokeWidth={1.5}
+                />
+              </a>
+            )}
           </div>
         </div>
       </section>

@@ -237,6 +237,35 @@ export async function getVipLandingBySlug(
   return mapLanding(doc)
 }
 
+/** Slug de la landing VIP publicada de una propiedad (por su slug público). */
+export async function getVipLandingSlugForPropertySlug(
+  slug: string,
+): Promise<string | null> {
+  const res = await sanityClient.fetch<string | null>(
+    `*[_type == "vipLanding" && published == true && property->slug.current == $slug][0].slug.current`,
+    { slug },
+    { next: { revalidate: REVALIDATE } },
+  )
+  return res ?? null
+}
+
+/** Mapa { propiedadDocId → landingSlug } para una lista de docs (usado en /cuenta). */
+export async function getVipLandingMapForPropertyIds(
+  ids: string[],
+): Promise<Record<string, string>> {
+  if (ids.length === 0) return {}
+  const rows = await sanityClient.fetch<
+    Array<{ propId: string; slug: string }>
+  >(
+    `*[_type == "vipLanding" && published == true && property._ref in $ids]{
+      "propId": property._ref, "slug": slug.current
+    }`,
+    { ids },
+    { next: { revalidate: REVALIDATE } },
+  )
+  return Object.fromEntries(rows.map((r) => [r.propId, r.slug]))
+}
+
 export async function getVipLandingSlugs(): Promise<string[]> {
   return sanityClient.fetch<string[]>(
     `*[_type == "vipLanding" && published == true].slug.current`,

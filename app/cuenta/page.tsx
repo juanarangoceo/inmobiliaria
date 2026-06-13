@@ -1,9 +1,14 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { Plus } from "lucide-react"
+import { Plus, ArrowUpRight } from "lucide-react"
 import { createClient } from "@/lib/supabase/server"
 import { signOut } from "@/lib/auth/actions"
 import { Button } from "@/components/ui/button"
+import { CopyLinkButton } from "@/components/copy-link-button"
+import { getVipLandingMapForPropertyIds } from "@/lib/sanity/queries"
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ?? "https://visionestatecolombia.com"
 
 export const metadata = {
   title: "Mi cuenta",
@@ -26,8 +31,14 @@ export default async function CuentaPage() {
 
   const { data: submissions } = await supabase
     .from("submissions")
-    .select("id, title, city, status, created_at")
+    .select("id, title, city, status, sanity_doc_id, created_at")
     .order("created_at", { ascending: false })
+
+  // Landings VIP publicadas para las propiedades del usuario.
+  const docIds = (submissions ?? [])
+    .map((s) => s.sanity_doc_id)
+    .filter((id): id is string => Boolean(id))
+  const landingMap = await getVipLandingMapForPropertyIds(docIds)
 
   return (
     <main className="mx-auto min-h-dvh max-w-3xl px-6 py-16">
@@ -68,20 +79,50 @@ export default async function CuentaPage() {
             </Button>
           </div>
         ) : (
-          submissions.map((s) => (
-            <div
-              key={s.id}
-              className="flex items-center justify-between gap-4 rounded-xl border border-foreground/10 px-5 py-4"
-            >
-              <div>
-                <p className="font-medium">{s.title ?? "Propiedad sin título"}</p>
-                <p className="text-sm text-muted-foreground">{s.city ?? "—"}</p>
+          submissions.map((s) => {
+            const landingSlug = s.sanity_doc_id
+              ? landingMap[s.sanity_doc_id]
+              : undefined
+            const landingUrl = landingSlug ? `${SITE_URL}/v/${landingSlug}` : null
+            return (
+              <div
+                key={s.id}
+                className="rounded-xl border border-foreground/10 px-5 py-4"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="font-medium">
+                      {s.title ?? "Propiedad sin título"}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {s.city ?? "—"}
+                    </p>
+                  </div>
+                  <span className="font-mono rounded-full border border-foreground/15 px-3 py-1 text-[11px] uppercase tracking-wide text-muted-foreground">
+                    {STATUS_LABEL[s.status] ?? s.status}
+                  </span>
+                </div>
+
+                {landingUrl && (
+                  <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-foreground/10 pt-4">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--luxe-ink)]">
+                      Landing VIP
+                    </span>
+                    <a
+                      href={landingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-foreground/15 px-4 py-2 text-xs font-medium transition-colors hover:border-foreground/40"
+                    >
+                      Ver mi landing
+                      <ArrowUpRight className="size-3.5" strokeWidth={1.5} />
+                    </a>
+                    <CopyLinkButton url={landingUrl} />
+                  </div>
+                )}
               </div>
-              <span className="font-mono rounded-full border border-foreground/15 px-3 py-1 text-[11px] uppercase tracking-wide text-muted-foreground">
-                {STATUS_LABEL[s.status] ?? s.status}
-              </span>
-            </div>
-          ))
+            )
+          })
         )}
       </div>
     </main>
