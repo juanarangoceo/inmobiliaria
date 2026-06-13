@@ -226,7 +226,7 @@ export default async function VipPage() {
                   </div>
                   <div className="space-y-2">
                     <span className="inline-block max-w-[80%] rounded-2xl bg-white/15 px-3 py-2 text-[11px] text-white backdrop-blur-md">
-                      ¿Disponibilidad en Valle de Bravo con caballerizas?
+                      ¿Disponibilidad en el Eje Cafetero con vista a la montaña?
                     </span>
                     <span className="block max-w-[85%] rounded-2xl bg-[color:var(--luxe)]/90 px-3 py-2 text-[11px] text-[color:var(--luxe-foreground)]">
                       Tengo 2 opciones off-market. Le envío el dossier privado.
@@ -469,9 +469,9 @@ export default async function VipPage() {
               <p className="max-w-xl text-pretty text-base leading-relaxed text-background/75">
                 Producción editorial, recorrido 360° profesional, concierge IA
                 dedicado y distribución privada a una red de compradores
-                verificados. Publicación reservada a inmuebles desde{" "}
-                <span className="font-mono tabular text-background">
-                  USD 1M
+                verificados. Publicación reservada por{" "}
+                <span className="font-mono text-background">
+                  admisión por curaduría
                 </span>
                 .
               </p>

@@ -180,13 +180,35 @@ export function SubmitForm() {
         </div>
       </section>
 
+      {/* Consentimiento Ley 1581 */}
+      <label className="flex items-start gap-3 border-t border-foreground/10 pt-8 text-sm text-muted-foreground">
+        <input
+          type="checkbox"
+          name="consent"
+          required
+          className="mt-0.5 size-4 flex-shrink-0"
+        />
+        <span>
+          Autorizo el tratamiento de mis datos conforme a la{" "}
+          <Link
+            href="/privacidad"
+            target="_blank"
+            className="text-foreground underline underline-offset-4 hover:text-[color:var(--luxe-ink)]"
+          >
+            Política de Tratamiento de Datos
+          </Link>{" "}
+          y que Vision Estate comparta mi contacto con su agencia aliada para
+          acompañar la venta.
+        </span>
+      </label>
+
       {state.error && (
         <p className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
           {state.error}
         </p>
       )}
 
-      <div className="flex items-center gap-4 border-t border-foreground/10 pt-8">
+      <div className="flex items-center gap-4 pt-2">
         <Button type="submit" size="lg" disabled={pending}>
           {pending ? "Enviando…" : "Enviar a revisión"}
         </Button>

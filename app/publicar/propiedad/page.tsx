@@ -7,9 +7,10 @@ import { SiteFooter } from "@/components/site-footer"
 import { SubmitForm } from "@/components/listings/submit-form"
 
 export const metadata = {
-  title: "Publica tu propiedad · Vision Estate Colombia",
+  title: "Publica tu propiedad",
   description:
     "Sube tu propiedad gratis. Nuestro equipo la revisa y la publica en Vision Estate Colombia.",
+  robots: { index: false, follow: true },
 }
 
 export default async function PublicarPropiedadPage() {

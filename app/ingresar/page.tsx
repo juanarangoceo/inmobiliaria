@@ -5,9 +5,10 @@ import { createClient } from "@/lib/supabase/server"
 import { AuthForm } from "@/components/auth/auth-form"
 
 export const metadata = {
-  title: "Ingresar · Vision Estate Colombia",
+  title: "Ingresar",
   description:
     "Accede o crea tu cuenta para publicar y gestionar tus propiedades en Vision Estate Colombia.",
+  robots: { index: false, follow: false },
 }
 
 export default async function IngresarPage() {

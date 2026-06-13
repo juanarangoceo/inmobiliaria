@@ -55,8 +55,11 @@
   --surface-glass: oklch(1 0 0 / 0.6);
   --surface-glass-border: oklch(0 0 0 / 0.08);
 
-  /* VIP — champagne bronze, used only for exclusive accents */
+  /* VIP — champagne bronze, used only for exclusive accents.
+     --luxe: para texto sobre fondos oscuros y superficies.
+     --luxe-ink: bronce más profundo, para TEXTO luxe sobre fondos claros. */
   --luxe: oklch(0.68 0.07 72);
+  --luxe-ink: oklch(0.5 0.09 72);
   --luxe-soft: oklch(0.92 0.03 78);
   --luxe-foreground: oklch(0.18 0 0);
 }
@@ -112,6 +115,8 @@
 
   /* VIP — brighter champagne for dark backdrops */
   --luxe: oklch(0.82 0.09 78);
+  /* En oscuro casi no hay fondos claros; si --luxe-ink aparece, mantener legible. */
+  --luxe-ink: oklch(0.82 0.09 78);
   --luxe-soft: oklch(0.35 0.04 72);
   --luxe-foreground: oklch(0.14 0 0);
 }
@@ -147,6 +152,7 @@
   --color-chart-5: var(--chart-5);
 
   --color-luxe: var(--luxe);
+  --color-luxe-ink: var(--luxe-ink);
   --color-luxe-soft: var(--luxe-soft);
   --color-luxe-foreground: var(--luxe-foreground);
 
@@ -199,6 +205,33 @@
 
   .hairline {
     border-color: color-mix(in oklch, var(--foreground) 10%, transparent);
+  }
+
+  /* ── Recetas de scrim (una sola capa sobre fotografía) ──────────────────
+     Texto siempre legible (≥ /90). Usar sobre Image con object-cover. */
+  .scrim-hero {
+    background-image: linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.72) 0%,
+      rgb(0 0 0 / 0.32) 38%,
+      rgb(0 0 0 / 0) 72%
+    );
+  }
+  .scrim-card {
+    background-image: linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.62) 0%,
+      rgb(0 0 0 / 0.18) 46%,
+      rgb(0 0 0 / 0) 80%
+    );
+  }
+  .scrim-band {
+    background-image: linear-gradient(
+      to right,
+      rgb(0 0 0 / 0.8) 0%,
+      rgb(0 0 0 / 0.55) 42%,
+      rgb(0 0 0 / 0.25) 100%
+    );
   }
 
   .grain::before {

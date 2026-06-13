@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { organizationJsonLd, jsonLdScript } from "@/lib/seo/jsonld"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -24,11 +25,33 @@ const playfair = Playfair_Display({
   style: ["normal", "italic"],
 })
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ?? "https://visionestatecolombia.com"
+
 export const metadata: Metadata = {
-  title: "Vision Estate — Inmuebles curados con inteligencia",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Vision Estate Colombia — Propiedades de venta curadas",
+    template: "%s — Vision Estate Colombia",
+  },
   description:
-    "Plataforma inmobiliaria impulsada por IA. Leads precalificados, inmuebles verificados y acceso VIP a propiedades exclusivas.",
-  generator: "v0.app",
+    "Colección curada de propiedades en venta en Colombia, presentadas con criterio editorial. Acceso libre; admisión por curaduría.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_CO",
+    siteName: "Vision Estate Colombia",
+    url: SITE_URL,
+    title: "Vision Estate Colombia — Propiedades de venta curadas",
+    description:
+      "Colección curada de propiedades en venta en Colombia, presentadas con criterio editorial.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vision Estate Colombia",
+    description:
+      "Colección curada de propiedades en venta en Colombia.",
+  },
   icons: {
     icon: [
       { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
@@ -61,6 +84,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLdScript(organizationJsonLd())}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

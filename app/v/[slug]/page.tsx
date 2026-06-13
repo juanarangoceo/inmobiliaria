@@ -18,11 +18,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
   const { slug } = await params
   const landing = await getVipLandingBySlug(slug)
-  if (!landing?.property) return { title: "Propiedad" }
+  if (!landing?.property)
+    return { title: "Propiedad", robots: { index: false, follow: false } }
   const brand = landing.clientName ?? landing.property.title
   return {
     title: `${landing.property.title} · ${brand}`,
     description: landing.heroSubcopy ?? landing.property.tagline,
+    // Landing privada white-label: no se indexa (contenido duplicado + privado)
+    robots: { index: false, follow: false },
   }
 }
 

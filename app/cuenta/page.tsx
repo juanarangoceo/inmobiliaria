@@ -6,7 +6,8 @@ import { signOut } from "@/lib/auth/actions"
 import { Button } from "@/components/ui/button"
 
 export const metadata = {
-  title: "Mi cuenta · Vision Estate Colombia",
+  title: "Mi cuenta",
+  robots: { index: false, follow: false },
 }
 
 const STATUS_LABEL: Record<string, string> = {

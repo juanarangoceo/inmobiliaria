@@ -5,6 +5,9 @@ const REVALIDATE = 60
 
 type SanityProp = {
   id: string
+  updatedAt?: string
+  seoTitle?: string
+  seoDescription?: string
   code?: string
   title: string
   titleEn?: string
@@ -37,6 +40,9 @@ type SanityProp = {
 
 const FIELDS = /* groq */ `
   "id": slug.current,
+  "updatedAt": _updatedAt,
+  "seoTitle": seo.metaTitle,
+  "seoDescription": seo.metaDescription,
   code, title, titleEn, location, city, region,
   price, currency, propertyType,
   bedrooms, bathrooms, area, parking, year,
@@ -110,6 +116,13 @@ function toProperty(p: SanityProp): Property {
       p.geo?.lat != null && p.geo?.lng != null
         ? `${p.geo.lat.toFixed(4)}° N · ${Math.abs(p.geo.lng).toFixed(4)}° W`
         : (p.location ?? p.city),
+    geo:
+      p.geo?.lat != null && p.geo?.lng != null
+        ? { lat: p.geo.lat, lng: p.geo.lng }
+        : undefined,
+    updatedAt: p.updatedAt,
+    seoTitle: p.seoTitle,
+    seoDescription: p.seoDescription,
     agent: {
       name: p.agent?.name ?? "Equipo Vision Estate",
       role: p.agent?.role ?? "Asesoría premium",

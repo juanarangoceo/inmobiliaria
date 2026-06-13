@@ -52,6 +52,12 @@ export async function submitProperty(
   } = await supabase.auth.getUser()
   if (!user) return { error: "Debes iniciar sesión para publicar." }
 
+  if (formData.get("consent") !== "on")
+    return {
+      error:
+        "Debes autorizar el tratamiento de tus datos (Ley 1581) para publicar.",
+    }
+
   const title = String(formData.get("title") ?? "").trim()
   const city = String(formData.get("city") ?? "").trim()
   const propertyType = String(formData.get("propertyType") ?? "").trim()
@@ -129,14 +135,21 @@ export async function submitProperty(
     return { error: "No pudimos guardar la propiedad. Intenta de nuevo." }
   }
 
-  // Registro liviano en Supabase para que el usuario siga su estado
-  await supabase.from("submissions").insert({
-    user_id: user.id,
-    sanity_doc_id: docId,
-    title,
-    city,
-    status: "pending",
-  })
+  // Registro liviano en Supabase para que el usuario siga su estado.
+  // Si esto falla, la propiedad YA está en la cola de Sanity: no bloqueamos
+  // al usuario, solo registramos el error (antes esto lanzaba y crasheaba).
+  try {
+    const { error } = await supabase.from("submissions").insert({
+      user_id: user.id,
+      sanity_doc_id: docId,
+      title,
+      city,
+      status: "pending",
+    })
+    if (error) console.error("submissions insert error:", error.message)
+  } catch (e) {
+    console.error("submissions insert threw:", e)
+  }
 
   return { ok: true }
 }

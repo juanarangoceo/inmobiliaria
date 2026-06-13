@@ -97,19 +97,19 @@ export function SiteFooter() {
           </p>
           <div className="flex items-center gap-6">
             <Link
-              href="#"
+              href="/privacidad"
               className="text-xs text-muted-foreground hover:text-foreground"
             >
               Privacidad
             </Link>
             <Link
-              href="#"
+              href="/terminos"
               className="text-xs text-muted-foreground hover:text-foreground"
             >
               Términos
             </Link>
             <Link
-              href="#"
+              href="/cookies"
               className="text-xs text-muted-foreground hover:text-foreground"
             >
               Cookies

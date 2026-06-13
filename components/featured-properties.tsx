@@ -9,7 +9,7 @@ export async function FeaturedProperties() {
   const top = properties.slice(0, 3)
   const editorial = properties[3]
   return (
-    <section className="relative py-16 md:py-24">
+    <section id="destacadas" className="relative scroll-mt-24 py-16 md:py-24">
       <div className="mx-auto max-w-[1400px] px-6">
         {/* Header */}
         <div className="flex flex-col gap-6 border-b border-foreground/10 pb-8 md:flex-row md:items-end md:justify-between md:pb-10">
@@ -29,7 +29,7 @@ export async function FeaturedProperties() {
           </div>
           <Link
             href="/vip"
-            className="group inline-flex items-center gap-2 self-start text-sm text-foreground transition-colors hover:text-[color:var(--luxe)] md:self-end"
+            className="group inline-flex items-center gap-2 self-start text-sm text-foreground transition-colors hover:text-[color:var(--luxe-ink)] md:self-end"
           >
             <span className="font-mono text-[11px] tracking-[0.2em] uppercase">
               Ver Colección VIP
@@ -56,7 +56,7 @@ export async function FeaturedProperties() {
           <div className="flex flex-col justify-end">
             <div className="mb-3 flex items-center gap-3">
               <span className="h-px w-8 bg-[color:var(--luxe)]/60" aria-hidden />
-              <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
+              <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
                 Colección Privada · VIP
               </span>
             </div>

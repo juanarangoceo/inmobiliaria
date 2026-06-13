@@ -31,7 +31,7 @@ const services = [
     eyebrow: "Representación de venta",
     title: "Intermediación discreta",
     description:
-      "Comercialización privada, off-market o publicada con curaduría, reservada a inmuebles desde USD 1M. Distribución a una red de compradores verificados, sin banners, sin ruido.",
+      "Comercialización privada, off-market o publicada con curaduría, por admisión selectiva. Distribución a una red de compradores verificados, sin banners, sin ruido.",
     bullets: [
       "Mandato exclusivo con objetivos firmados",
       "Producción editorial y tour 360 incluidos",
@@ -87,7 +87,7 @@ const services = [
     eyebrow: "Asesoría jurídica y fiscal",
     title: "Red legal internacional",
     description:
-      "Coordinamos con despachos aliados en México, España, Estados Unidos y Emiratos. Estructuración, fideicomisos, residencia fiscal y compliance patrimonial.",
+      "Coordinamos con despachos aliados en Colombia y para compradores en Estados Unidos, Canadá y Europa. Estructuración, fiducia, residencia fiscal y compliance patrimonial.",
     bullets: [
       "Due diligence en 12 días calendario",
       "Estructuras transfronterizas revisadas",
@@ -207,7 +207,7 @@ export default function ServiciosPage() {
           <div className="mx-auto flex max-w-[1400px] items-center justify-between border-t border-white/15 px-6 py-4 font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase">
             <span>Vol. 01 — Primavera 2026</span>
             <span className="hidden md:inline">
-              Oficinas · Ciudad de México · Valle de Bravo · Madrid
+              Oficinas · Medellín · Cartagena · Bogotá
             </span>
             <span>Sólo por referencia</span>
           </div>
@@ -219,10 +219,10 @@ export default function ServiciosPage() {
         <div className="mx-auto max-w-[1400px] px-6 py-14 md:py-16">
           <dl className="grid grid-cols-2 gap-10 md:grid-cols-4 md:gap-12">
             {[
-              { v: "18", u: "años", l: "Mercado high-ticket" },
-              { v: "USD 420M", u: "+", l: "Asesorados en 2025" },
-              { v: "11", u: "ciudades", l: "México · España · EE. UU." },
-              { v: "94", u: "%", l: "Cierre sobre mandato" },
+              { v: "Solo venta", u: "", l: "Sin arriendos" },
+              { v: "Colombia", u: "", l: "Base · alcance global" },
+              { v: "Curaduría", u: "", l: "Admisión selectiva" },
+              { v: "24/7", u: "", l: "Concierge IA · VIP" },
             ].map((k) => (
               <div
                 key={k.l}
@@ -500,7 +500,7 @@ export default function ServiciosPage() {
                     className="size-1 rounded-full bg-[color:var(--luxe)]"
                     aria-hidden
                   />
-                  Salón privado · CDMX
+                  Salón privado · Medellín
                 </div>
               </div>
             </div>
@@ -586,7 +586,7 @@ export default function ServiciosPage() {
                 <div>
                   <p className="text-sm">María J. Beltrán</p>
                   <p className="font-mono text-[10px] tracking-[0.22em] text-background/55 uppercase">
-                    Family office · Guanajuato
+                    Family office · Colombia
                   </p>
                 </div>
               </div>
@@ -602,7 +602,7 @@ export default function ServiciosPage() {
                     Valor cerrado
                   </dt>
                   <dd className="font-display mt-2 text-3xl tracking-tight tabular md:text-4xl">
-                    USD 7.8M
+                    $9.500M COP
                   </dd>
                 </div>
                 <div>
@@ -669,24 +669,24 @@ export default function ServiciosPage() {
               <dl className="mt-14 space-y-5 border-t border-foreground/10 pt-8">
                 <div className="flex items-start justify-between gap-6">
                   <dt className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
-                    Ciudad de México
+                    Medellín
                   </dt>
                   <dd className="text-right text-sm">
-                    Polanco · Torre Virreyes 6º
+                    El Poblado · Por cita
                   </dd>
                 </div>
                 <div className="flex items-start justify-between gap-6">
                   <dt className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
-                    Valle de Bravo
+                    Cartagena
                   </dt>
-                  <dd className="text-right text-sm">Plaza Independencia 14</dd>
+                  <dd className="text-right text-sm">Centro histórico · Por cita</dd>
                 </div>
                 <div className="flex items-start justify-between gap-6">
                   <dt className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
-                    Madrid
+                    Bogotá
                   </dt>
                   <dd className="text-right text-sm">
-                    Recoletos 09 · Por cita
+                    Por cita
                   </dd>
                 </div>
               </dl>

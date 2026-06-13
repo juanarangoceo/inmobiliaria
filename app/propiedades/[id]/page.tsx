@@ -25,6 +25,11 @@ import {
   getPropertyBySlug,
   getPropertySlugs,
 } from "@/lib/sanity/queries"
+import {
+  propertyToJsonLd,
+  breadcrumbJsonLd,
+  jsonLdScript,
+} from "@/lib/seo/jsonld"
 
 type Params = { id: string }
 
@@ -40,10 +45,27 @@ export async function generateMetadata({
 }) {
   const { id } = await params
   const property = await getPropertyBySlug(id)
-  if (!property) return { title: "Inmueble · Vision Estate Colombia" }
+  if (!property) return { title: "Inmueble" }
+  const title = property.seoTitle || `${property.title} · ${property.location}`
+  const description =
+    property.seoDescription || property.tagline || property.description[0]
   return {
-    title: `${property.title} · ${property.location} · Vision Estate Colombia`,
-    description: property.tagline,
+    title,
+    description,
+    alternates: { canonical: `/propiedades/${property.id}` },
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: `/propiedades/${property.id}`,
+      images: property.image ? [property.image] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: property.image ? [property.image] : undefined,
+    },
   }
 }
 
@@ -62,6 +84,14 @@ export default async function PropertyPage({
 
   return (
     <main className="relative min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdScript(propertyToJsonLd(property))}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdScript(breadcrumbJsonLd(property))}
+      />
       <SiteHeader />
 
       {/* Breadcrumb / return */}

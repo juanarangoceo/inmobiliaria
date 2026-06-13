@@ -15,65 +15,66 @@ import { SiteFooter } from "@/components/site-footer"
 import { MobileTabBar } from "@/components/mobile-tab-bar"
 
 export const metadata = {
-  title: "Publicar en VIP · Vision Estate",
+  title: "Publica tu propiedad",
   description:
-    "Producción editorial, recorrido 360° profesional, concierge IA y distribución privada. Publicación reservada a inmuebles de alto valor.",
+    "Publica gratis tras curaduría, o accede al tier VIP: landing privada propia, chatbot que conoce el inmueble y producción editorial. Solo venta, Colombia.",
 }
 
-const PLANS = [
+type Tier = {
+  id: string
+  name: string
+  kicker: string
+  price: string
+  priceStrike?: string
+  priceNote?: string
+  tagline: string
+  included: string[]
+  excluded: string[]
+  featured?: boolean
+  cta: { label: string; href: string }
+}
+
+const TIERS: Tier[] = [
   {
-    id: "signature",
-    name: "Signature",
-    kicker: "Entrada a la colección",
-    price: "USD 2,400",
-    period: "por 90 días",
+    id: "gratuito",
+    name: "Gratuito",
+    kicker: "Publica tu propiedad",
+    price: "Sin costo",
+    priceNote: "siempre",
     tagline:
-      "Producción editorial y distribución privada. Para inmuebles que merecen contarse bien, sin ruido.",
+      "Sube tu inmueble desde la web. Nuestro equipo lo revisa y, si encaja con la colección, lo publica. Sin intermediarios.",
     included: [
-      "Sesión editorial · 1 día",
-      "Recorrido 360° completo",
-      "Narrativa escrita por asesor",
-      "Distribución en colección privada",
-      "Reportes quincenales",
+      "Publicación en el portal tras curaduría",
+      "Ficha editorial con tus fotografías",
+      "Contacto directo de compradores",
+      "Revisión y aprobación manual por nuestro equipo",
     ],
-    excluded: ["Concierge IA dedicado", "Videollamada instantánea 24/7"],
+    excluded: [
+      "Landing privada white-label",
+      "Chatbot IA dedicado",
+      "Producción editorial",
+    ],
+    cta: { label: "Publicar gratis", href: "/publicar/propiedad" },
   },
   {
-    id: "private-collection",
-    name: "Private Collection",
-    kicker: "Recomendado",
-    price: "USD 6,800",
-    period: "por 180 días",
+    id: "vip",
+    name: "VIP",
+    kicker: "Colección inaugural",
+    price: "Sin costo durante la colección inaugural",
+    priceStrike: "$180.000 COP",
+    priceNote: "por publicación",
     tagline:
-      "El estándar para propiedades desde USD 2M. Una presentación completa, con concierge IA dedicado y soporte humano 1:1.",
+      "Una presentación a la altura del inmueble: una URL privada propia (sin nuestra marca), un chatbot que conoce la propiedad y distribución dirigida.",
     included: [
-      "Sesión editorial · 2 días",
-      "Recorrido 360° cinemático",
-      "Concierge IA Aster · dedicado",
-      "Videollamada IA al instante 24/7",
-      "Asesor humano dedicado 1:1",
-      "Distribución privada + 2 eventos",
-      "Dossier impreso · 24 piezas",
+      "Todo lo del plan Gratuito",
+      "Landing privada white-label · URL propia",
+      "Chatbot IA que conoce el inmueble · 24/7",
+      "Producción y narrativa editorial",
+      "Distribución dirigida a compradores",
     ],
     excluded: [],
     featured: true,
-  },
-  {
-    id: "off-market",
-    name: "Off-market",
-    kicker: "Sólo por invitación",
-    price: "A consultar",
-    period: "contrato a medida",
-    tagline:
-      "Propiedades fuera de mercado presentadas a una red cerrada. Confidencialidad absoluta, proceso silencioso.",
-    included: [
-      "Proceso completamente privado",
-      "NDAs con todas las visitas",
-      "Casting de compradores verificados",
-      "Cierre con equipo legal propio",
-      "Absoluta discreción",
-    ],
-    excluded: [],
+    cta: { label: "Solicitar acceso VIP", href: "#solicitud" },
   },
 ]
 
@@ -81,40 +82,33 @@ const PRODUCTION = [
   {
     icon: Camera,
     t: "Producción editorial",
-    d: "Un director de arte, un fotógrafo arquitectónico y un escritor visitan la propiedad durante 1 o 2 días. Todo se produce al nivel de una revista, no de un portal.",
+    d: "Tratamos cada inmueble como una pieza editorial: fotografía cuidada y una narrativa que cuenta la historia de la propiedad, no una ficha clasificada.",
   },
   {
     icon: RotateCw,
-    t: "Recorrido 360° cinemático",
-    d: "Capturamos la propiedad con estaciones esféricas de alta resolución. El comprador recorre el inmueble desde su escritorio con medidas y anotaciones.",
+    t: "Recorrido 360°",
+    d: "Capturamos la propiedad en alta resolución para que el comprador la recorra desde su pantalla, con medidas y anotaciones.",
   },
   {
     icon: Sparkles,
     t: "Concierge IA dedicado",
-    d: "Entrenamos a Aster —nuestra agente IA— en los detalles exactos de su propiedad. Atiende consultas 24/7 con la misma precisión que un asesor humano.",
+    d: "El chatbot de tu landing conoce los detalles exactos del inmueble y responde consultas 24/7 con precisión.",
   },
   {
     icon: Phone,
-    t: "Videollamada al instante",
-    d: "Cualquier comprador verificado puede iniciar una videollamada con un agente IA en menos de 5 segundos. Sin agendar, sin fricción, sin pérdida de tiempo.",
+    t: "Landing privada propia",
+    d: "Una URL white-label sin nuestra marca, pensada para compartir por WhatsApp con compradores y aliados.",
   },
   {
     icon: ShieldCheck,
-    t: "Verificación legal",
-    d: "Antes de publicar revisamos títulos, gravámenes, uso de suelo y cumplimiento fiscal. Cada listado lleva el sello Vision Estate Verified.",
+    t: "Verificación previa",
+    d: "Antes de publicar revisamos la información del inmueble. Cada listado lleva el sello de curaduría de Vision Estate.",
   },
   {
     icon: FileSignature,
-    t: "Cierre acompañado",
-    d: "Desde la oferta hasta la escritura. Coordinamos notaría, abogados y fondo de garantía. Usted sólo firma cuando tiene toda la información.",
+    t: "Acompañamiento de venta",
+    d: "La operación se gestiona con nuestra agencia aliada, Colombia Inmobiliaria, que acompaña el proceso hasta el cierre.",
   },
-]
-
-const STATS = [
-  { k: "37 días", l: "Tiempo medio al cierre" },
-  { k: "+12%", l: "Premium vs. mercado abierto" },
-  { k: "94%", l: "Satisfacción del vendedor" },
-  { k: "840+", l: "Compradores verificados" },
 ]
 
 export default function PublicarPage() {
@@ -128,8 +122,8 @@ export default function PublicarPage() {
           <div className="flex flex-col justify-center md:col-span-6">
             <div className="flex items-center gap-3">
               <span className="h-px w-10 bg-[color:var(--luxe)]" aria-hidden />
-              <span className="font-mono text-[11px] tracking-[0.32em] text-[color:var(--luxe)] uppercase">
-                Publicar en la Colección Privada
+              <span className="font-mono text-[11px] tracking-[0.32em] text-[color:var(--luxe-ink)] uppercase">
+                Publica en Vision Estate Colombia
               </span>
             </div>
 
@@ -140,28 +134,28 @@ export default function PublicarPage() {
             </h1>
 
             <p className="mt-8 max-w-lg text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-base">
-              La publicación en Vision Estate VIP es un servicio curado y de pago.
-              Producimos su inmueble al nivel de una obra editorial y lo
-              distribuimos en privado a una red verificada de compradores.
+              Sube tu propiedad gratis y, tras curaduría, la publicamos. Si quieres
+              una presentación a otro nivel, el tier VIP te da una landing privada
+              propia y un chatbot que conoce el inmueble.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
-                href="#planes"
+                href="/publicar/propiedad"
                 className="group inline-flex h-12 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-90"
               >
-                Ver planes de publicación
+                Publicar gratis
                 <ArrowUpRight
                   className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   strokeWidth={1.5}
                 />
               </Link>
               <Link
-                href="/vip"
+                href="#planes"
                 className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
               >
                 <span className="font-mono text-[11px] tracking-[0.22em] uppercase">
-                  Ver la colección
+                  Comparar Gratuito y VIP
                 </span>
                 <ArrowUpRight
                   className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -170,25 +164,17 @@ export default function PublicarPage() {
               </Link>
             </div>
 
-            <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-foreground/10 pt-10 md:grid-cols-4">
-              {STATS.map((s) => (
-                <div key={s.l}>
-                  <p className="font-display text-2xl leading-none tracking-tight tabular md:text-3xl">
-                    {s.k}
-                  </p>
-                  <p className="font-mono mt-2 text-[10px] leading-relaxed tracking-[0.2em] text-muted-foreground uppercase">
-                    {s.l}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <p className="mt-14 border-t border-foreground/10 pt-10 font-mono text-[11px] leading-relaxed tracking-[0.2em] text-muted-foreground uppercase">
+              Solo venta · Admisión por curaduría · La aprobación es siempre
+              manual
+            </p>
           </div>
 
           <div className="relative md:col-span-6">
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
                 src="/landings/publicar-vip.jpg"
-                alt="Oficina privada · Vision Estate"
+                alt="Propiedad presentada por Vision Estate"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -217,16 +203,179 @@ export default function PublicarPage() {
                     className="size-1.5 rounded-full bg-[color:var(--luxe)]"
                     aria-hidden
                   />
-                  Sesión en curso
+                  Colección inaugural
                 </span>
-                <span>Valle de Bravo · 14:22</span>
+                <span>Colombia · 2026</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============ PRODUCTION INCLUDED ============ */}
+      {/* ============ TIERS ============ */}
+      <section id="planes" className="relative bg-background">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
+          <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-3 flex items-center gap-3">
+                <span
+                  className="h-px w-8 bg-[color:var(--luxe)]/70"
+                  aria-hidden
+                />
+                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
+                  Dos formas de publicar · 01
+                </span>
+              </div>
+              <h2 className="font-display max-w-2xl text-balance text-4xl leading-[1.05] tracking-tight md:text-[56px]">
+                Gratuito o VIP. Tú eliges la escala.
+              </h2>
+            </div>
+            <p className="max-w-md text-pretty text-sm leading-relaxed text-muted-foreground md:text-right">
+              Ambos pasan por curaduría y aprobación manual. La diferencia está en
+              la presentación: el VIP suma landing privada propia, chatbot
+              dedicado y producción editorial.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-px overflow-hidden border border-foreground/10 bg-foreground/10 md:grid-cols-2">
+            {TIERS.map((tier) => (
+              <article
+                key={tier.id}
+                className={
+                  tier.featured
+                    ? "relative flex flex-col bg-foreground p-8 text-background md:p-10"
+                    : "relative flex flex-col bg-background p-8 md:p-10"
+                }
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={
+                      tier.featured
+                        ? "font-mono text-[10px] tracking-[0.22em] text-[color:var(--luxe)] uppercase"
+                        : "font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase"
+                    }
+                  >
+                    {tier.kicker}
+                  </span>
+                  {tier.featured && (
+                    <span className="flex size-6 items-center justify-center rounded-full bg-[color:var(--luxe)]/15 ring-1 ring-[color:var(--luxe)]/40">
+                      <Sparkles
+                        className="size-3 text-[color:var(--luxe)]"
+                        strokeWidth={1.75}
+                      />
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="font-display mt-6 text-3xl leading-tight tracking-tight md:text-[38px]">
+                  {tier.name}
+                </h3>
+
+                <p
+                  className={
+                    tier.featured
+                      ? "mt-4 text-sm leading-relaxed text-background/70"
+                      : "mt-4 text-sm leading-relaxed text-muted-foreground"
+                  }
+                >
+                  {tier.tagline}
+                </p>
+
+                <div
+                  className={
+                    tier.featured
+                      ? "mt-8 border-t border-white/15 pt-6"
+                      : "mt-8 border-t border-foreground/10 pt-6"
+                  }
+                >
+                  {tier.priceStrike && (
+                    <span
+                      className={
+                        tier.featured
+                          ? "font-display text-xl tracking-tight tabular text-background/40 line-through"
+                          : "font-display text-xl tracking-tight tabular text-muted-foreground line-through"
+                      }
+                    >
+                      {tier.priceStrike}
+                    </span>
+                  )}
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <span className="font-display text-2xl tracking-tight md:text-3xl">
+                      {tier.price}
+                    </span>
+                  </div>
+                  {tier.priceNote && (
+                    <span
+                      className={
+                        tier.featured
+                          ? "font-mono mt-2 inline-block text-[10px] tracking-[0.2em] text-background/60 uppercase"
+                          : "font-mono mt-2 inline-block text-[10px] tracking-[0.2em] text-muted-foreground uppercase"
+                      }
+                    >
+                      {tier.priceNote}
+                    </span>
+                  )}
+                </div>
+
+                <ul className="mt-8 space-y-3 text-sm">
+                  {tier.included.map((f) => (
+                    <li key={f} className="flex items-start gap-3">
+                      <Check
+                        className="mt-0.5 size-3.5 flex-shrink-0 text-[color:var(--luxe)]"
+                        strokeWidth={2}
+                      />
+                      <span
+                        className={
+                          tier.featured
+                            ? "text-background/90"
+                            : "text-foreground/80"
+                        }
+                      >
+                        {f}
+                      </span>
+                    </li>
+                  ))}
+                  {tier.excluded.map((f) => (
+                    <li
+                      key={f}
+                      className={
+                        tier.featured
+                          ? "flex items-start gap-3 text-background/40 line-through"
+                          : "flex items-start gap-3 text-muted-foreground/60 line-through"
+                      }
+                    >
+                      <span
+                        className="mt-0.5 size-3.5 flex-shrink-0"
+                        aria-hidden
+                      />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-10 flex-1" />
+                <Link
+                  href={tier.cta.href}
+                  className={
+                    tier.featured
+                      ? "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[color:var(--luxe)] px-5 text-sm font-medium text-[color:var(--luxe-foreground)] transition-opacity hover:opacity-90"
+                      : "inline-flex h-12 items-center justify-center gap-2 rounded-full border border-foreground/20 px-5 text-sm text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/5"
+                  }
+                >
+                  {tier.cta.label}
+                  <ArrowUpRight className="size-4" strokeWidth={1.5} />
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-8 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+            Solo venta · Publicación sujeta a curaduría · Admisión por curaduría
+          </p>
+        </div>
+      </section>
+
+      {/* ============ WHAT VIP INCLUDES ============ */}
       <section className="relative border-y border-foreground/10 bg-secondary/30">
         <div className="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
           <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
@@ -236,8 +385,8 @@ export default function PublicarPage() {
                   className="h-px w-8 bg-[color:var(--luxe)]/70"
                   aria-hidden
                 />
-                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
-                  Qué incluye publicar · 01
+                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
+                  Qué incluye el VIP · 02
                 </span>
               </div>
               <h2 className="font-display max-w-3xl text-balance text-4xl leading-[1.05] tracking-tight md:text-[56px]">
@@ -249,8 +398,8 @@ export default function PublicarPage() {
               </h2>
             </div>
             <p className="max-w-md text-pretty text-sm leading-relaxed text-muted-foreground md:text-right">
-              No somos un portal. Somos un estudio editorial especializado en
-              activos de alto valor. Nuestro trabajo se juzga en el detalle.
+              No somos un portal masivo. Tratamos cada inmueble del tier VIP como
+              una pieza editorial. Nuestro trabajo se juzga en el detalle.
             </p>
           </div>
 
@@ -265,7 +414,7 @@ export default function PublicarPage() {
                   <div className="flex items-start justify-between">
                     <div className="flex size-10 items-center justify-center rounded-full border border-[color:var(--luxe)]/30 bg-[color:var(--luxe)]/5">
                       <Icon
-                        className="size-4 text-[color:var(--luxe)]"
+                        className="size-4 text-[color:var(--luxe-ink)]"
                         strokeWidth={1.5}
                       />
                     </div>
@@ -286,171 +435,10 @@ export default function PublicarPage() {
         </div>
       </section>
 
-      {/* ============ PLANS ============ */}
-      <section id="planes" className="relative bg-background">
-        <div className="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
-          <div className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="mb-3 flex items-center gap-3">
-                <span
-                  className="h-px w-8 bg-[color:var(--luxe)]/70"
-                  aria-hidden
-                />
-                <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
-                  Planes de publicación · 02
-                </span>
-              </div>
-              <h2 className="font-display max-w-2xl text-balance text-4xl leading-[1.05] tracking-tight md:text-[56px]">
-                Tres formas de presentar una propiedad excepcional.
-              </h2>
-            </div>
-            <p className="max-w-md text-pretty text-sm leading-relaxed text-muted-foreground md:text-right">
-              Todos los planes incluyen recorrido 360°, verificación legal y
-              distribución privada. La diferencia está en la escala de la
-              producción editorial.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-px overflow-hidden border border-foreground/10 bg-foreground/10 md:grid-cols-3">
-            {PLANS.map((plan) => (
-              <article
-                key={plan.id}
-                className={
-                  plan.featured
-                    ? "relative flex flex-col bg-foreground p-8 text-background md:p-10"
-                    : "relative flex flex-col bg-background p-8 md:p-10"
-                }
-              >
-                <div className="flex items-center justify-between">
-                  <span
-                    className={
-                      plan.featured
-                        ? "font-mono text-[10px] tracking-[0.22em] text-[color:var(--luxe)] uppercase"
-                        : "font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase"
-                    }
-                  >
-                    {plan.kicker}
-                  </span>
-                  {plan.featured && (
-                    <span className="flex size-6 items-center justify-center rounded-full bg-[color:var(--luxe)]/15 ring-1 ring-[color:var(--luxe)]/40">
-                      <Sparkles
-                        className="size-3 text-[color:var(--luxe)]"
-                        strokeWidth={1.75}
-                      />
-                    </span>
-                  )}
-                </div>
-
-                <h3
-                  className={
-                    plan.featured
-                      ? "font-display mt-6 text-3xl leading-tight tracking-tight md:text-[38px]"
-                      : "font-display mt-6 text-3xl leading-tight tracking-tight md:text-[38px]"
-                  }
-                >
-                  {plan.name}
-                </h3>
-
-                <p
-                  className={
-                    plan.featured
-                      ? "mt-4 text-sm leading-relaxed text-background/70"
-                      : "mt-4 text-sm leading-relaxed text-muted-foreground"
-                  }
-                >
-                  {plan.tagline}
-                </p>
-
-                <div
-                  className={
-                    plan.featured
-                      ? "mt-8 flex items-baseline gap-2 border-t border-white/15 pt-6"
-                      : "mt-8 flex items-baseline gap-2 border-t border-foreground/10 pt-6"
-                  }
-                >
-                  <span className="font-display text-3xl tracking-tight tabular md:text-4xl">
-                    {plan.price}
-                  </span>
-                  <span
-                    className={
-                      plan.featured
-                        ? "font-mono text-[10px] tracking-[0.2em] text-background/60 uppercase"
-                        : "font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase"
-                    }
-                  >
-                    {plan.period}
-                  </span>
-                </div>
-
-                <ul className="mt-8 space-y-3 text-sm">
-                  {plan.included.map((f) => (
-                    <li key={f} className="flex items-start gap-3">
-                      <Check
-                        className={
-                          plan.featured
-                            ? "mt-0.5 size-3.5 flex-shrink-0 text-[color:var(--luxe)]"
-                            : "mt-0.5 size-3.5 flex-shrink-0 text-[color:var(--luxe)]"
-                        }
-                        strokeWidth={2}
-                      />
-                      <span
-                        className={
-                          plan.featured
-                            ? "text-background/90"
-                            : "text-foreground/80"
-                        }
-                      >
-                        {f}
-                      </span>
-                    </li>
-                  ))}
-                  {plan.excluded.map((f) => (
-                    <li
-                      key={f}
-                      className={
-                        plan.featured
-                          ? "flex items-start gap-3 text-background/40 line-through"
-                          : "flex items-start gap-3 text-muted-foreground/60 line-through"
-                      }
-                    >
-                      <span
-                        className="mt-0.5 size-3.5 flex-shrink-0"
-                        aria-hidden
-                      />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-10 flex-1" />
-                <Link
-                  href="#solicitud"
-                  className={
-                    plan.featured
-                      ? "inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[color:var(--luxe)] px-5 text-sm font-medium text-[color:var(--luxe-foreground)] transition-opacity hover:opacity-90"
-                      : "inline-flex h-12 items-center justify-center gap-2 rounded-full border border-foreground/20 px-5 text-sm text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/5"
-                  }
-                >
-                  {plan.id === "off-market"
-                    ? "Solicitar invitación"
-                    : `Elegir ${plan.name}`}
-                  <ArrowUpRight className="size-4" strokeWidth={1.5} />
-                </Link>
-              </article>
-            ))}
-          </div>
-
-          <p className="mt-8 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-            Todos los precios excluyen IVA · Publicación sujeta a curaduría del
-            comité editorial · Mínimo USD 1M de valor de propiedad
-          </p>
-        </div>
-      </section>
-
       {/* ============ APPLICATION FORM ============ */}
       <section
         id="solicitud"
-        className="relative border-t border-foreground/10 bg-secondary/30"
+        className="relative scroll-mt-24 border-t border-foreground/10 bg-secondary/30"
       >
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 py-20 md:grid-cols-[1fr_1.1fr] md:gap-20 md:py-28">
           <div>
@@ -459,8 +447,8 @@ export default function PublicarPage() {
                 className="h-px w-8 bg-[color:var(--luxe)]/70"
                 aria-hidden
               />
-              <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe)] uppercase">
-                Solicitud de publicación · 03
+              <span className="font-mono text-[11px] tracking-[0.24em] text-[color:var(--luxe-ink)] uppercase">
+                Solicitud de acceso VIP · 03
               </span>
             </div>
             <h2 className="font-display text-balance text-4xl leading-[1.05] tracking-tight md:text-[56px]">
@@ -470,35 +458,42 @@ export default function PublicarPage() {
               </span>
             </h2>
             <p className="mt-6 max-w-md text-pretty text-sm leading-relaxed text-muted-foreground">
-              Cada solicitud es revisada por nuestro comité editorial. Si hay
-              encaje con la colección, coordinamos una visita previa y
-              acordamos el calendario de producción.
+              Cada solicitud la revisa nuestro equipo. Si hay encaje con la
+              colección, coordinamos una visita previa y el calendario de
+              producción. ¿Solo quieres publicar gratis?{" "}
+              <Link
+                href="/publicar/propiedad"
+                className="text-foreground underline underline-offset-4 hover:text-[color:var(--luxe-ink)]"
+              >
+                Sube tu propiedad aquí
+              </Link>
+              .
             </p>
 
             <dl className="mt-10 space-y-5">
               <div className="flex items-baseline justify-between gap-6 border-b border-foreground/10 pb-4">
-                <dt className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
-                  Inmuebles publicados
+                <dt className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
+                  Modelo
                 </dt>
-                <dd className="font-mono text-sm tabular">127 al año</dd>
+                <dd className="font-mono text-sm">Solo venta</dd>
               </div>
               <div className="flex items-baseline justify-between gap-6 border-b border-foreground/10 pb-4">
-                <dt className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
-                  Valor mínimo aceptado
+                <dt className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
+                  Admisión
                 </dt>
-                <dd className="font-mono text-sm tabular">USD 1,000,000</dd>
+                <dd className="font-mono text-sm">Por curaduría</dd>
               </div>
               <div className="flex items-baseline justify-between gap-6 border-b border-foreground/10 pb-4">
-                <dt className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
-                  Tasa de aceptación
+                <dt className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
+                  Aprobación
                 </dt>
-                <dd className="font-mono text-sm tabular">22%</dd>
+                <dd className="font-mono text-sm">Manual, siempre</dd>
               </div>
               <div className="flex items-baseline justify-between gap-6">
-                <dt className="font-mono text-[10px] tracking-[0.22em] text-muted-foreground uppercase">
-                  Tiempo medio al cierre
+                <dt className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground uppercase">
+                  Respuesta
                 </dt>
-                <dd className="font-mono text-sm tabular">37 días</dd>
+                <dd className="font-mono text-sm">En 48 horas</dd>
               </div>
             </dl>
           </div>
@@ -506,7 +501,7 @@ export default function PublicarPage() {
           <form className="flex flex-col gap-4 border border-foreground/10 bg-background p-6 md:p-10">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <label className="flex flex-col gap-1.5">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+                <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
                   Nombre del propietario
                 </span>
                 <input
@@ -517,13 +512,13 @@ export default function PublicarPage() {
                 />
               </label>
               <label className="flex flex-col gap-1.5">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                  Email privado
+                <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
+                  Email
                 </span>
                 <input
                   type="email"
                   required
-                  placeholder="usted@privado.com"
+                  placeholder="usted@correo.com"
                   className="h-11 border border-foreground/15 bg-transparent px-3 text-sm focus:border-[color:var(--luxe)] focus:outline-none"
                 />
               </label>
@@ -531,18 +526,18 @@ export default function PublicarPage() {
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <label className="flex flex-col gap-1.5">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+                <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
                   Ciudad del inmueble
                 </span>
                 <input
                   type="text"
-                  placeholder="CDMX, Valle, Careyes…"
+                  placeholder="Medellín, Cartagena, Bogotá…"
                   className="h-11 border border-foreground/15 bg-transparent px-3 text-sm focus:border-[color:var(--luxe)] focus:outline-none"
                 />
               </label>
               <label className="flex flex-col gap-1.5">
-                <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                  Valor estimado (USD)
+                <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
+                  Valor estimado (COP)
                 </span>
                 <select
                   className="h-11 border border-foreground/15 bg-transparent px-3 text-sm focus:border-[color:var(--luxe)] focus:outline-none"
@@ -551,43 +546,21 @@ export default function PublicarPage() {
                   <option value="" disabled>
                     Seleccione rango
                   </option>
-                  <option>USD 1M — 3M</option>
-                  <option>USD 3M — 8M</option>
-                  <option>USD 8M — 20M</option>
-                  <option>USD 20M+</option>
+                  <option>Hasta $1.000M COP</option>
+                  <option>$1.000M — $3.000M COP</option>
+                  <option>$3.000M — $8.000M COP</option>
+                  <option>$8.000M+ COP</option>
                 </select>
               </label>
             </div>
 
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
-                Plan de interés
-              </span>
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-                {PLANS.map((p) => (
-                  <label
-                    key={p.id}
-                    className="flex cursor-pointer items-center gap-3 border border-foreground/15 px-4 py-3 text-sm transition-colors hover:border-[color:var(--luxe)]/40"
-                  >
-                    <input
-                      type="radio"
-                      name="plan"
-                      value={p.id}
-                      className="accent-[color:var(--luxe)]"
-                    />
-                    <span>{p.name}</span>
-                  </label>
-                ))}
-              </div>
-            </label>
-
-            <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+              <span className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
                 Cuéntenos del inmueble
               </span>
               <textarea
                 rows={4}
-                placeholder="Arquitecto, materialidad, superficie, razones de venta…"
+                placeholder="Tipo, ubicación, superficie, razones de venta…"
                 className="border border-foreground/15 bg-transparent p-3 text-sm focus:border-[color:var(--luxe)] focus:outline-none"
               />
             </label>
@@ -597,9 +570,9 @@ export default function PublicarPage() {
               className="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-4 text-sm font-medium text-background transition-opacity hover:opacity-90"
             >
               <FileSignature className="size-4" strokeWidth={1.5} />
-              Enviar solicitud privada
+              Enviar solicitud
             </button>
-            <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="font-mono text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
               Sus datos nunca se comparten · Revisión manual en 48h
             </p>
           </form>

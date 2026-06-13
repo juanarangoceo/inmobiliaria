@@ -31,6 +31,10 @@ export type Property = {
   amenities: string[]
   gallery: string[]
   coordinates: string
+  geo?: { lat: number; lng: number }
+  updatedAt?: string
+  seoTitle?: string
+  seoDescription?: string
   agent: {
     name: string
     role: string

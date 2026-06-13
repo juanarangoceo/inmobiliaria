@@ -62,9 +62,9 @@ export function PropertyCard({
           className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
         />
 
-        {/* Bottom gradient for legibility */}
+        {/* Scrim estándar de card (legibilidad de chip y código) */}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 via-black/10 to-transparent"
+          className="scrim-card pointer-events-none absolute inset-0"
           aria-hidden
         />
 

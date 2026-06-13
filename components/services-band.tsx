@@ -12,12 +12,9 @@ export function ServicesBand() {
             alt="Estudio de asesoría Vision Estate"
             fill
             sizes="100vw"
-            className="object-cover opacity-45"
+            className="object-cover"
           />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/15"
-          />
+          <div aria-hidden className="scrim-band absolute inset-0" />
 
           <div className="relative z-10 grid grid-cols-1 gap-10 px-8 py-16 md:grid-cols-12 md:gap-12 md:px-14 md:py-24 lg:px-20 lg:py-28">
             <div className="md:col-span-7">
@@ -49,19 +46,19 @@ export function ServicesBand() {
             <div className="flex flex-col justify-end md:col-span-5 md:items-end">
               <ul className="grid grid-cols-2 gap-8 border-y border-white/15 py-8 md:w-full">
                 <li>
-                  <p className="font-display text-2xl tracking-tight tabular md:text-3xl">
-                    USD 420M
+                  <p className="font-display text-2xl tracking-tight md:text-3xl">
+                    Curaduría
                   </p>
                   <p className="font-mono mt-2 text-[10px] tracking-[0.22em] text-white/55 uppercase">
-                    Asesorados · 2025
+                    Admisión selectiva
                   </p>
                 </li>
                 <li>
                   <p className="font-display text-2xl tracking-tight tabular md:text-3xl">
-                    94<span className="text-lg">%</span>
+                    24/7
                   </p>
                   <p className="font-mono mt-2 text-[10px] tracking-[0.22em] text-white/55 uppercase">
-                    Cierre sobre mandato
+                    Concierge IA · VIP
                   </p>
                 </li>
               </ul>

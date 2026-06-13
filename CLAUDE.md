@@ -1,7 +1,7 @@
 # Vision Estate Colombia — Bitácora del proyecto
 
 > Documento vivo. Se actualiza al cerrar cada fase o cambio relevante para que cualquiera
-> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-09 (F1–F7 cerradas y EN PRODUCCIÓN; navegación con accesos añadida; repo en sync; queda solo F8 global opcional).
+> (o una nueva sesión de Claude) sepa **dónde vamos y qué sigue**. Última actualización: 2026-06-13 (build original F1–F7 EN PRODUCCIÓN; **PLAN MAESTRO en ejecución**: Fases 1, 2 y 4 cerradas + Fase 3 parcial — ver §9).
 
 ---
 
@@ -134,5 +134,65 @@ Web lee SOLO publicados (next-sanity, ISR)
 
 ## 8. Cómo retomar
 1. Lee este archivo + memorias `infra-vision-estate` y `vision-estate-architecture`.
-2. Mira el tracker (§5): la primera casilla sin marcar es lo siguiente.
+2. Mira el tracker (§5) y la ejecución del PLAN MAESTRO (§9): la primera casilla sin marcar es lo siguiente.
 3. Si los tools `mcp__supabase-vision-local__*` no aparecen, reinicia la sesión de Claude Code (el MCP local se carga al iniciar).
+
+## 9. PLAN MAESTRO — ejecución (fuente: `gdrive:openclaw/inmobiliaria/PLAN-MAESTRO-inmobiliaria.md`)
+
+> Juan autorizó ejecutar **las 9 fases**. Líneas duras: COP siempre (USD solo `≈`),
+> VIP $180k tachado "sin costo en la colección inaugural", CTAs de simuladas →
+> waitlist, Gemini solo texto, aprobación humana siempre manual, estética editorial.
+> Umbral VIP: **"Admisión por curaduría"** (sin cifra). El plan técnico completo está
+> en `~/.claude/plans/he-ideado-un-plan-calm-codd.md`.
+
+### Hecho y EN PRODUCCIÓN (este lote)
+- **Fase 1 — Limpieza del template ✅**
+  - `components/hero-section.tsx` reescrito: server component que lee Sanity; portada
+    editorial con 1 propiedad destacada + código VE + tagline; stats falsas
+    (12,480/98.2%/4.8min) → línea honesta "Colección curada · {count} piezas · Admisión
+    por curaduría"; CTA dual; **buscador eliminado** (`components/hero-search.tsx` borrado).
+  - `app/publicar/page.tsx` reescrito: de 3 planes USD → **comparación Gratuito vs VIP**
+    (VIP $180.000 COP tachado + "sin costo durante la colección inaugural"); copy Colombia.
+  - `/vip` y `/servicios`: quitados USD-como-principal y todos los mexicanismos
+    (Polanco/Valle de Bravo/CDMX/Madrid/Guanajuato → ciudades colombianas), métricas
+    infladas → cualitativas honestas. `app/layout.tsx`: quitado `generator:v0.app`,
+    `title.template`, `metadataBase`.
+  - **`middleware.ts` → `proxy.ts`** (Next 16; export `proxy`, mismo matcher).
+- **Fase 2 — Riesgo legal ✅**
+  - `app/{privacidad,terminos,cookies}/page.tsx` (componente `components/legal-shell.tsx`).
+    Privacidad cubre **Ley 1581** + autorización del flujo portal → Colombia Inmobiliaria.
+  - Footer enlaza a las 3 rutas. **Checkbox de consentimiento** en `submit-form.tsx`
+    (validado server-side en `actions.ts`).
+  - `noindex`: `/v/[slug]`, `/cuenta`, `/ingresar`, `/publicar/propiedad`; `/studio` ya
+    venía noindex (next-sanity). `robots.ts` con `disallow` de rutas privadas.
+- **Fase 4 — SEO técnico ✅**
+  - `lib/seo/jsonld.ts`: `organizationJsonLd` (RealEstateAgent + sameAs TikTok, en layout),
+    `propertyToJsonLd` (RealEstateListing) + `breadcrumbJsonLd` (en la ficha).
+  - `app/sitemap.ts`: `lastModified` desde `_updatedAt` real + imágenes (añadidos `updatedAt`,
+    `geo`, `seoTitle/Description` a `Property` y a `FIELDS` en `queries.ts`).
+  - **OG image dinámica** `app/propiedades/[id]/opengraph-image.tsx` (foto+VE+precio+sello).
+    `openGraph`/`twitter` + `canonical` en layout y ficha (usa `seo.metaTitle/Description`).
+  - `app/llms.txt/route.ts`; webhook `app/api/revalidate/route.ts` (revalidatePath +
+    IndexNow). **Pendiente config:** envs `SANITY_REVALIDATE_SECRET` e `INDEXNOW_KEY` +
+    crear el webhook en Sanity apuntando a `/api/revalidate`.
+- **Deuda submitProperty ✅:** insert a Supabase `submissions` ahora en try/catch (ya no
+  crashea ni deja docs huérfanos); + consentimiento obligatorio.
+
+### Parcial / pendiente
+- **Fase 3 — Diseño (PARCIAL):** hechos → token `--luxe-ink` (bronce p/ texto sobre claro)
+  en `globals.css` + `@theme`; 3 recetas de scrim (`.scrim-hero/.scrim-card/.scrim-band`)
+  aplicadas en hero/card/services-band; tab bar móvil → **Home/VIP/Publicar/Cuenta**;
+  `--luxe-ink` aplicado en home (`featured-properties`) y `/publicar`.
+  **Falta:** barrido `--luxe-ink` en `servicios` (¡cuidado! tiene bandas oscuras donde
+  `--luxe` debe quedarse) y demás archivos (quedan ~40 usos de `text-[color:var(--luxe)]`);
+  piso tipográfico 11px global; `/vip` dark forzado (evaluado, no aplicado por riesgo);
+  estados táctiles de hover.
+- **Fases 5–9 PENDIENTES.** Próximo: **Fase 5** — tabla Supabase `waitlist` (migración vía
+  `mcp__supabase-vision-local`), `components/waitlist-form.tsx`, CTAs de simuladas→waitlist,
+  home en 4 actos + Territorios, campo `featuredFromTikTok` en schema, `/coleccion`, ficha
+  en capítulos. Luego 6 (acceso landing VIP), 7 (GEO: schemas territorio/respuesta/informe +
+  `/respuestas` + Cron Gemini→cola), 8 (`/en` + hreflang), 9 (Círculo + drops + vendida).
+- **SMTP Resend** (deuda §2.8): config externa en Supabase dashboard (no código).
+
+### Verificación de este lote
+`tsc --noEmit` ✅ · `next build` ✅ (25 rutas). Pendiente smoke móvil 390px en prod.

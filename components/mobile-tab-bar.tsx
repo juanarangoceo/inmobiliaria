@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Briefcase, Sparkles, PlusSquare } from "lucide-react"
+import { Home, User, Sparkles, PlusSquare } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function MobileTabBar() {
@@ -10,23 +10,23 @@ export function MobileTabBar() {
   const tabs = [
     { href: "/", label: "Inmuebles", icon: Home, match: pathname === "/" },
     {
-      href: "/servicios",
-      label: "Servicios",
-      icon: Briefcase,
-      match: pathname.startsWith("/servicios"),
-    },
-    {
-      href: "/publicar/propiedad",
-      label: "Publicar",
-      icon: PlusSquare,
-      match: pathname.startsWith("/publicar"),
-    },
-    {
       href: "/vip",
       label: "VIP",
       icon: Sparkles,
       luxe: true,
       match: pathname.startsWith("/vip"),
+    },
+    {
+      href: "/publicar",
+      label: "Publicar",
+      icon: PlusSquare,
+      match: pathname.startsWith("/publicar"),
+    },
+    {
+      href: "/cuenta",
+      label: "Cuenta",
+      icon: User,
+      match: pathname.startsWith("/cuenta") || pathname.startsWith("/ingresar"),
     },
   ]
 
